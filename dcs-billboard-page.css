@@ -1,0 +1,90 @@
+
+body {
+	margin:0;
+	padding:0;
+}
+
+.parent-element  {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+
+.element {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#touchjet { 
+	background: url(../images/device.png) 90% 1px no-repeat;
+    background-size: 20%;
+    //background-color: #4d7fad;  
+	height: 25%;  
+	margin: 0 auto; 
+    width: 100%; 
+    max-width: 1200px; 
+    position: absolute; 
+	z-index: 4;
+    top: 300px;
+}
+
+#bg-panel  {
+   	margin: 0 auto;
+	width: 85%;
+    z-index: -15;
+}
+
+#bg-panel img  {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+#bg-panel img.transparent  {
+    opacity: 0;
+}
+
+#bg-panel-1 { 
+	background-image: url(../images/panel1.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#bg-panel-2 { 
+	background-image: url(../images/panel2.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#bg-panel-3 { 
+	background-image: url(../images/panel3.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#bg-panel-4 { 
+	background-image: url(../images/panel4.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#bg-panel-5 { 
+	background-image: url(../images/panel5.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#bg-panel-6 { 
+	background-image: url(../images/panel6.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
+#bg-panel-7 { 
+	background-image: url(../images/panel7.png);
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+
