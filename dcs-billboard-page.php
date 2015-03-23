@@ -28,11 +28,27 @@ add_action( 'enqueue_scripts', 'dcs_billboard_page_load_scripts' );
  */ 
 function dcs_billboard_page_shortcode($atts, $content=null)
 {
-    extract( shortcode_attts( array( ), $atts ) );
+    extract( shortcode_atts( array( ), $atts ) );
     $retval = "Jason was here";
-
-
+    
+    $retval .= dcs_billboard_page_getPanel( 1 );
+    $retval .= dcs_billboard_page_getPanel( 2 );
+    $retval .= dcs_billboard_page_getPanel( 3 );
+    $retval .= dcs_billboard_page_getPanel( 4 );
+    $retval .= dcs_billboard_page_getPanel( 5 );
+    $retval .= dcs_billboard_page_getPanel( 6 );
+    $retval .= dcs_billboard_page_getPanel( 7 );
     return $retval;
 }
 add_shortcode( 'dcs_billboard_page', 'dcs_billboard_page_shortcode' );
+
+/**
+ * Central Panel Code Getter
+ */
+function dcs_billboard_page_getPanel($index)
+{
+    $retval = "";
+
+    return $retval;
+}
 
