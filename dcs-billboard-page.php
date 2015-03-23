@@ -29,8 +29,8 @@ add_action( 'enqueue_scripts', 'dcs_billboard_page_load_scripts' );
 function dcs_billboard_page_shortcode($atts, $content=null)
 {
     extract( shortcode_atts( array( ), $atts ) );
-    $retval = "Jason was here";
-    
+    $retval = "<section class='bg-panel'>";
+    $retval .= dcs_billboard_page_getSprite();
     $retval .= dcs_billboard_page_getPanel( 1 );
     $retval .= dcs_billboard_page_getPanel( 2 );
     $retval .= dcs_billboard_page_getPanel( 3 );
@@ -38,9 +38,18 @@ function dcs_billboard_page_shortcode($atts, $content=null)
     $retval .= dcs_billboard_page_getPanel( 5 );
     $retval .= dcs_billboard_page_getPanel( 6 );
     $retval .= dcs_billboard_page_getPanel( 7 );
+	$retval .= "</section>";
     return $retval;
 }
 add_shortcode( 'dcs_billboard_page', 'dcs_billboard_page_shortcode' );
+
+/**
+ * Get the Sprite code.
+ */
+function dcs_billboard_page_getSprite()
+{
+	return "<section id='dcs-billboard-sprite' data-type='foreground'></section>"; 
+}
 
 /**
  * Central Panel Code Getter
@@ -48,6 +57,21 @@ add_shortcode( 'dcs_billboard_page', 'dcs_billboard_page_shortcode' );
 function dcs_billboard_page_getPanel($index)
 {
     $retval = "";
+
+	switch($index)
+	{
+		case 1:
+		case 3:
+		case 4:
+		case 5:
+			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
+			$retval .= "	<img id='bg-panel-".$index."' src='../images/panel".$index."_0.png'>";
+			$retval .= "</div>";
+			break;
+		default:
+			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
+			$retval .= "</div>";
+	}
 
     return $retval;
 }

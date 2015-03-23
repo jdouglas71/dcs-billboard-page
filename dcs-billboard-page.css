@@ -1,9 +1,4 @@
 
-body {
-	margin:0;
-	padding:0;
-}
-
 .parent-element  {
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
@@ -16,7 +11,7 @@ body {
     transform: translateY(-50%);
 }
 
-#touchjet { 
+#dcs-billboard-sprite { 
 	background: url(../images/device.png) 90% 1px no-repeat;
     background-size: 20%;
     //background-color: #4d7fad;  
