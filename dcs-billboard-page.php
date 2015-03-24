@@ -15,14 +15,14 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
  */
 function dcs_billboard_page_load_scripts()
 {
-    //JGD TODO: Register for specific page only.
     wp_register_style( 'dcs_billboard_page_style', plugin_dir_url(__FILE__).'dcs-billboard-page.css' );
     wp_enqueue_style( 'dcs_billboard_page_style' );
 
     wp_register_script( 'dcs_billboard_page_script', plugin_dir_url(__FILE__).'dcs-billboard-page.js', array('jquery') );
     wp_enqueue_script( 'dcs_billboard_page_script' );
 }
-add_action( 'wp_enqueue_scripts', 'dcs_billboard_page_load_scripts' );
+//if(is_page('Home')) 
+    add_action( 'wp_enqueue_scripts', 'dcs_billboard_page_load_scripts' );
 
 /**
  * Short code for the billboard page.
@@ -71,6 +71,7 @@ function dcs_billboard_page_getPanel($index)
 			break;
 		default:
 			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
+			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
 			$retval .= "</div>";
 	}
 

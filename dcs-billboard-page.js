@@ -8,9 +8,9 @@
  * TODO: Handle scaling.
  */
 
-$(document).ready(function()  {
+jQuery(document).ready(function()  {
 	// Cache the Window object
-	$window = $(window);
+	$window = jQuery(window);
     var $oldPanel = 0;
 
     /** Background Section Processing */
@@ -28,9 +28,9 @@ $(document).ready(function()  {
 	 * Set the heights of the panel divs.
 	 */
 	i = 0;
-	$('div.bg-panel').each(function() {
-		$(this).height(Math.round(panelSizes[i++]*scaleFactor));
-		$(this).width(1200);
+	jQuery('div.bg-panel').each(function() {
+		jQuery(this).height(Math.round(panelSizes[i++]*scaleFactor));
+		jQuery(this).width(1200);
 	});
 
 	/** Track the "Swap state" of the panels. 2,6 and 7 don't have swap panels.*/
@@ -43,11 +43,11 @@ $(document).ready(function()  {
 	/**
 	 * Move the foreground section.
 	 */
-	$('section[data-type="foreground"]').each(function(){
-		var $fgobj = $(this); // assigning the object
+	jQuery('section[data-type="foreground"]').each(function(){
+		var $fgobj = jQuery(this); // assigning the object
 		var ratio = Math.round(sectionSize/$window.height()) + 5;
 
-		$(window).scroll(function() {
+		jQuery(window).scroll(function() {
 			var yPos = $window.scrollTop();
 			prevSchool = yPos;
 			var curPos = parseInt($fgobj.css('top'),10);
@@ -57,7 +57,7 @@ $(document).ready(function()  {
             {
                 var timeout = 700;
                 if( panelNum == 1 ) timeout = 3000;
-                //console.log( "SWAPPING" );
+                console.log( "SWAPPING" );
                 setTimeout(function() {swapPanelImages( panelNum );}, timeout );
             }
             $oldPanel = panelNum;
@@ -67,7 +67,7 @@ $(document).ready(function()  {
 			//console.log( "ratio: " + ratio );
 			if( (curPos < bottomLimit) || (curPos > (yPos+$window.height()-200)) )  
 			{
-				yPos += $(window).scrollTop()/ratio;
+				yPos += jQuery(window).scrollTop()/ratio;
 				yPos += topLimit;
 				//console.log( "FG yPos: " + yPos );
 				$fgobj.css( { top : yPos } );              
@@ -98,8 +98,8 @@ $(document).ready(function()  {
     {
 		if( !swapState[panelNum-1] )
 		{
-            console.log( "Swapping Panel: " + panelNum );
-            $('img#bg-panel-'+panelNum).toggleClass("transparent");
+            //console.log( "Swapping Panel: " + panelNum );
+            jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
 			swapState[panelNum-1] = true;
 		}
     }
