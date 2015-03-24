@@ -69,7 +69,28 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index."_0.png'>";
 			$retval .= "</div>";
 			break;
-		default:
+        case 2:
+            $retval .= "<div class='bg-panel' id='bg-panel-2'>";
+            $retval .= "<div class='left'>";
+            $retval .= "<ul>";
+            $retval .= "<li>Connect anywhere there's WIFI -- no other devices or wires required.</li>";
+            $retval .= "<li>Download your favorite apps and content right onto the touchjet pond.</li>";
+            $retval .= "<li>Control your apps right on the wall with a stylus or air mouse.</li>";
+            $retval .= "</ul>";
+            $retval .= "</div><div class='right'>";
+            $retval .= "<hr class='blue-line'>";
+            $retval .= "</div>";
+            $retval .= "</div>";
+            break;
+        case 7:
+	    	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
+			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
+	        $retval .= "<div style='margin: 10px auto;width:0%;'>";
+            $retval .= "<a class='buy-button' href='".site_url("/buy")."'>Buy</a>";
+            $retval .= "</div>";
+		    $retval .= "</div>";
+            break;
+	default:
 			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
 			$retval .= "</div>";
