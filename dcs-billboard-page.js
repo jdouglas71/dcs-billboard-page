@@ -38,7 +38,7 @@ jQuery(document).ready(function()  {
 	
     /** Foreground Section Processing */
     var topLimit = 300; //As measured from top
-    var bottomLimit = 3045; //As measured from bottomo
+    var bottomLimit = 3135; //As measured from bottomo
     var deltaFG = bottomLimit - topLimit;
 	/**
 	 * Move the foreground section.
