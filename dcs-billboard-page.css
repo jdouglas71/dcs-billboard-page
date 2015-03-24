@@ -12,7 +12,7 @@
 }
 
 #dcs-billboard-sprite { 
-	background: url(../images/device.png) 90% 1px no-repeat;
+	background: url(./wp-content/plugins/dcs-billboard-page/images/device.png) 90% 1px no-repeat;
     background-size: 20%;
     //background-color: #4d7fad;  
 	height: 25%;  
@@ -42,43 +42,43 @@
 }
 
 #bg-panel-1 { 
-	background-image: url(../images/panel1.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel1.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-2 { 
-	background-image: url(../images/panel2.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel2.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-3 { 
-	background-image: url(../images/panel3.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel3.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-4 { 
-	background-image: url(../images/panel4.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel4.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-5 { 
-	background-image: url(../images/panel5.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel5.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-6 { 
-	background-image: url(../images/panel6.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel6.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-7 { 
-	background-image: url(../images/panel7.png);
+	background-image: url(./wp-content/plugins/dcs-billboard-page/images/panel7.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }

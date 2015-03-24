@@ -20,8 +20,9 @@ function dcs_billboard_page_load_scripts()
     wp_enqueue_style( 'dcs_billboard_page_style' );
 
     wp_register_script( 'dcs_billboard_page_script', plugin_dir_url(__FILE__).'dcs-billboard-page.js', array('jquery') );
+    wp_enqueue_script( 'dcs_billboard_page_script' );
 }
-add_action( 'enqueue_scripts', 'dcs_billboard_page_load_scripts' );
+add_action( 'wp_enqueue_scripts', 'dcs_billboard_page_load_scripts' );
 
 /**
  * Short code for the billboard page.
@@ -65,7 +66,7 @@ function dcs_billboard_page_getPanel($index)
 		case 4:
 		case 5:
 			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
-			$retval .= "	<img id='bg-panel-".$index."' src='../images/panel".$index."_0.png'>";
+			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index."_0.png'>";
 			$retval .= "</div>";
 			break;
 		default:
