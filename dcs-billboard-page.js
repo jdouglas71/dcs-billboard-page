@@ -51,10 +51,7 @@ jQuery(document).ready(function()  {
 			var curPos = parseInt($sprite.css('top'),10);
 			if( isNaN(curPos) ) curPos = topLimit;        
 		    var ratio = Math.round(sectionSize/$window.height()) + 5;
-            //if( isNearPanelEdge(curPos) ) ratio = 100; 
-            isNearPanelEdge(curPos); 
-            console.log( "bottomLimit: " + bottomLimit + " curPos: " + curPos + " yPos: " + yPos + " Window height: " + $window.height() + " yPos+window.height-200: " + (yPos+$window.height()-200) );
-	 		if( (curPos < bottomLimit) || (curPos > (yPos+$window.height()-200)) )  
+	 		if( (curPos < bottomLimit) && !isNearPanelEdge(curPos) )// || (curPos > (yPos+$window.height()-200)) )  
 			{
 				//yPos += jQuery(window).scrollTop()/ratio;
 				yPos += jQuery(window).scrollTop()/50;
@@ -89,28 +86,31 @@ jQuery(document).ready(function()  {
     {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
-        console.log( "isNearPanelEdge: Panel number: " + panelNum );
-        console.log( "curPos: " + curPos );
-        console.log( "SwapState: " + swapState[panelNum-1] );
-        if( !swapState[panelNum-1] )
-        {
-            var i = 0, curPanelEdge = 0;
-            for(i=0; i<panelNum; i++)
-            {
-                curPanelEdge += panelSizes[i]*scaleFactor;
-            }
-            var delta = curPanelEdge - curPos;
-            console.log( "curPanelEdge: " + curPanelEdge );
-            if( (delta < 125) &&  (delta >= 0) )
-            {   
-                console.log( "SLOWER DOWN!" );
-                retval = true;
-                if( delta < 100 ) swapPanelImages(panelNum);
-            }
+        var delta = getCurrentPanelEdge(curPos) - curPos;
+        //console.log( "curPanelEdge: " + curPanelEdge );
+        if( (delta < 105) && (delta >= 0) )
+        {   
+            //console.log( "SLOWER DOWN!" );
+            retval = true;
+            if( delta < 80 ) swapPanelImages(panelNum);
         }
-
         return retval;
     }
+
+    /**
+     * Get the current panel edge.
+     */
+    function getCurrentPanelEdge(curPos)
+    {
+        var i = 0, curPanelEdge = 0;
+        var panelNum = getPanelNumber(curPos);
+        for(i=0; i<panelNum; i++)
+        {
+            curPanelEdge += panelSizes[i]*scaleFactor;
+        }
+        return curPanelEdge;
+    }
+
     /**
      * Swap images
      */
