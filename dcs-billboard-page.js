@@ -37,7 +37,7 @@ jQuery(document).ready(function()  {
 	var swapState = new Array( false, true, false, false, false, true, true );
 	
     /** Foreground Section Processing */
-    var topLimit = 300; //As measured from top
+    var topLimit = 550; //As measured from top
     var bottomLimit = 3045; //As measured from bottomo
     var deltaFG = bottomLimit - topLimit;
 	/**
