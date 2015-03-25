@@ -49,7 +49,7 @@ add_shortcode( 'dcs_billboard_page', 'dcs_billboard_page_shortcode' );
  */
 function dcs_billboard_page_getSprite()
 {
-	return "<section id='dcs-billboard-sprite' data-type='foreground'></section>"; 
+	return "<section id='dcs-billboard-sprite' data-type='sprite'></section>"; 
 }
 
 /**

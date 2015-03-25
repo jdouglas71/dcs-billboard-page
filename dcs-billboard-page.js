@@ -37,40 +37,30 @@ jQuery(document).ready(function()  {
 	var swapState = new Array( false, true, false, false, false, true, true );
 	
     /** Foreground Section Processing */
-    var topLimit = 550; //As measured from top
-    var bottomLimit = 3045; //As measured from bottomo
-    var deltaFG = bottomLimit - topLimit;
+    var topLimit = 500; //As measured from top
+    var bottomLimit = 3145; //As measured from bottomo
 	/**
-	 * Move the foreground section.
+	 * Move the sprite section.
 	 */
-	jQuery('section[data-type="foreground"]').each(function(){
-		var $fgobj = jQuery(this); // assigning the object
-		var ratio = Math.round(sectionSize/$window.height()) + 5;
+	jQuery('section[data-type="sprite"]').each(function() {
+		var $sprite = jQuery(this); // assigning the object
 
 		jQuery(window).scroll(function() {
+            //Get the yPos of the top of the window
 			var yPos = $window.scrollTop();
-			prevSchool = yPos;
-			var curPos = parseInt($fgobj.css('top'),10);
+			var curPos = parseInt($sprite.css('top'),10);
 			if( isNaN(curPos) ) curPos = topLimit;        
-			var panelNum = getPanelNumber(curPos); 
-            if( (panelNum != $oldPanel) )  
-            {
-                var timeout = 700;
-                if( panelNum == 1 ) timeout = 3000;
-                console.log( "SWAPPING" );
-                setTimeout(function() {swapPanelImages( panelNum );}, timeout );
-            }
-            $oldPanel = panelNum;
-            //console.log( "Panel Number: " + getPanelNumber(curPos) );
-			//console.log( "curPos: " + curPos );
-			//console.log( "yPos+topLimit: " + (yPos+topLimit) );
-			//console.log( "ratio: " + ratio );
-			if( (curPos < bottomLimit) || (curPos > (yPos+$window.height()-200)) )  
+		    var ratio = Math.round(sectionSize/$window.height()) + 5;
+            //if( isNearPanelEdge(curPos) ) ratio = 100; 
+            isNearPanelEdge(curPos); 
+            console.log( "bottomLimit: " + bottomLimit + " curPos: " + curPos + " yPos: " + yPos + " Window height: " + $window.height() + " yPos+window.height-200: " + (yPos+$window.height()-200) );
+	 		if( (curPos < bottomLimit) || (curPos > (yPos+$window.height()-200)) )  
 			{
-				yPos += jQuery(window).scrollTop()/ratio;
+				//yPos += jQuery(window).scrollTop()/ratio;
+				yPos += jQuery(window).scrollTop()/50;
 				yPos += topLimit;
-				//console.log( "FG yPos: " + yPos );
-				$fgobj.css( { top : yPos } );              
+				console.log( "FG yPos: " + yPos );
+				$sprite.css( { top : yPos } );              
 			}
 		}); 
 	});
@@ -92,13 +82,43 @@ jQuery(document).ready(function()  {
 	}
 
     /**
+     * Return true if close to (swappable) panel edge.
+     * Price is Right rules apply.
+     */
+    function isNearPanelEdge(curPos)
+    {
+        var retval = false;
+        var panelNum = getPanelNumber(curPos);
+        console.log( "isNearPanelEdge: Panel number: " + panelNum );
+        console.log( "curPos: " + curPos );
+        console.log( "SwapState: " + swapState[panelNum-1] );
+        if( !swapState[panelNum-1] )
+        {
+            var i = 0, curPanelEdge = 0;
+            for(i=0; i<panelNum; i++)
+            {
+                curPanelEdge += panelSizes[i]*scaleFactor;
+            }
+            var delta = curPanelEdge - curPos;
+            console.log( "curPanelEdge: " + curPanelEdge );
+            if( (delta < 125) &&  (delta >= 0) )
+            {   
+                console.log( "SLOWER DOWN!" );
+                retval = true;
+                if( delta < 100 ) swapPanelImages(panelNum);
+            }
+        }
+
+        return retval;
+    }
+    /**
      * Swap images
      */
     function swapPanelImages(panelNum)
     {
 		if( !swapState[panelNum-1] )
 		{
-            //console.log( "Swapping Panel: " + panelNum );
+            console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
 			swapState[panelNum-1] = true;
 		}
