@@ -54,7 +54,7 @@ jQuery(document).ready(function()  {
             //if( isNearPanelEdge(curPos) ) ratio = 100; 
             isNearPanelEdge(curPos); 
             console.log( "bottomLimit: " + bottomLimit + " curPos: " + curPos + " yPos: " + yPos + " Window height: " + $window.height() + " yPos+window.height-200: " + (yPos+$window.height()-200) );
-	 		if( (curPos < bottomLimit) || (curPos > (yPos+$window.height()-200)) )  
+	 		if( (curPos < bottomLimit) )// || (curPos > (yPos+$window.height()-200)) )  
 			{
 				//yPos += jQuery(window).scrollTop()/ratio;
 				yPos += jQuery(window).scrollTop()/50;
