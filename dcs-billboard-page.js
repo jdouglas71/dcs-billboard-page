@@ -12,6 +12,7 @@ jQuery(document).ready(function()  {
 	// Cache the Window object
 	$window = jQuery(window);
     var $oldPanel = 0;
+    var $oldYPos = 0;
 
     /** Background Section Processing */
     //The panel sizes 
@@ -37,30 +38,49 @@ jQuery(document).ready(function()  {
 	var swapState = new Array( false, true, false, false, false, true, true );
 	
     /** Foreground Section Processing */
-    var topLimit = 500; //As measured from top
-    var bottomLimit = 3145; //As measured from bottomo
+    var topLimit = 600; //As measured from top
+    var bottomLimit = 3140; //As measured from bottom
 	/**
 	 * Move the sprite section.
 	 */
-	jQuery('section[data-type="sprite"]').each(function() {
-		var $sprite = jQuery(this); // assigning the object
+    var $sprite = jQuery('#dcs-billboard-sprite');
+    var curPos = parseInt($sprite.css('top'),10);
+	if( isNaN(curPos) || curPos <= 0 ) 
+    {
+        curPos = topLimit;        
+        setTimeout( function() {
+            $sprite.animate({ top : curPos },400,"linear");
+            swapPanelImages( 1 );
+        }, 2000);
+    }
 
-		jQuery(window).scroll(function() {
-            //Get the yPos of the top of the window
+    jQuery(window).scroll(function() {
 			var yPos = $window.scrollTop();
+            var deltaY = yPos - $oldYPos; 
+            console.log( "DeltaY: " + deltaY );
+            $oldYPos = yPos;
+            var winHeight = $window.height();
 			var curPos = parseInt($sprite.css('top'),10);
-			if( isNaN(curPos) ) curPos = topLimit;        
-		    var ratio = Math.round(sectionSize/$window.height()) + 5;
-	 		if( (curPos < bottomLimit) && !isNearPanelEdge(curPos) )// || (curPos > (yPos+$window.height()-200)) )  
+		    var ratio = 2.5;
+            var curPanelEdge = getCurrentPanelEdge( curPos );
+            var diff = yPos + winHeight - curPanelEdge;
+
+            var moveIt = true;
+            isNearPanelEdge( curPos );
+            //if( curPos > bottomLimit ) moveIt = false;
+            //if( moveIt && isNearPanelEdge(curPos) )
+           // {
+            //    if( Math.abs(diff) < 200 ) ratio = .5;
+           // }
+           //`if( Math.abs( yPos + winHeight - curPos ) < 300 ) ratio = 0.5;
+
+            if( moveIt )
 			{
-				//yPos += jQuery(window).scrollTop()/ratio;
-				yPos += jQuery(window).scrollTop()/50;
-				yPos += topLimit;
-				console.log( "FG yPos: " + yPos );
-				$sprite.css( { top : yPos } );              
+			    curPos += deltaY*getSpriteVelocity(curPos);
+			    console.log( "sprite curPos: " + curPos );
+				//$sprite.animate( { 'top' : "+="+(deltaY*getSpriteVelocity(curPos))+"px" } );              
 			}
 		}); 
-	});
 
 	/**
 	 * Get the panel number based on curPos.
@@ -90,9 +110,13 @@ jQuery(document).ready(function()  {
         //console.log( "curPanelEdge: " + curPanelEdge );
         if( (delta < 105) && (delta >= 0) )
         {   
-            //console.log( "SLOWER DOWN!" );
-            retval = true;
-            if( delta < 80 ) swapPanelImages(panelNum);
+            //We only care if we're in a swappable panel.
+            if( !swapState[panelNum-1] ) 
+            {
+                //console.log( "SLOWER DOWN!" );
+                retval = true;
+                if( delta < 80 ) swapPanelImages(panelNum);
+            }
         }
         return retval;
     }
@@ -120,8 +144,34 @@ jQuery(document).ready(function()  {
 		{
             console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
-			swapState[panelNum-1] = true;
+			//swapState[panelNum-1] = true;
 		}
+    }
+
+    /**
+     * Calculate the sprite velocity based on position.
+     */
+    function getSpriteVelocity(curPos)
+    {
+        var retval = 0;
+        var panelNum = getPanelNumber(curPos);
+        var prevEdge=0, nextEdge=0, i=0;
+        
+        if( curPos > bottomLimit ) return 0;
+        
+        for(i=0; i<panelNum-2; i++)
+        {
+            prevEdge += panelSizes[i]*scaleFactor;  
+        }
+        nextEdge = prevEdge + (panelSizes[panelNum-1]*scaleFactor);
+        //console.log( "prevEdge: " + prevEdge + " nextEdge: " + nextEdge + " scrollTop: " + $window.scrollTop() );
+        if( (curPos > (prevEdge+100) && curPos < (nextEdge-100)) ||
+            ((curPos - $window.scrollTop()) < 100) )
+        {
+            retval = 15;
+        }
+        console.log( "velocity: " + retval );
+        return retval;
     }
 }); 
 

@@ -18,6 +18,9 @@ function dcs_billboard_page_load_scripts()
     wp_register_style( 'dcs_billboard_page_style', plugin_dir_url(__FILE__).'dcs-billboard-page.css' );
     wp_enqueue_style( 'dcs_billboard_page_style' );
 
+    wp_register_script( 'jquery-spritely', plugin_dir_url(__FILE__).'/js/jquery.spritely.js', array('jquery') );
+    wp_enqueue_script( 'jquery-spritely' );
+
     wp_register_script( 'dcs_billboard_page_script', plugin_dir_url(__FILE__).'dcs-billboard-page.js', array('jquery') );
     wp_enqueue_script( 'dcs_billboard_page_script' );
 }
