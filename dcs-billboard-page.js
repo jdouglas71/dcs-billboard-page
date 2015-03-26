@@ -144,6 +144,9 @@ jQuery(document).ready(function()  {
 		{
             console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
+            if( $oldPanel != 0 ) 
+                jQuery('img#bg-panel-'+ $oldPanel).toggleClass("transparent");
+            $oldPanel = panelNum;
 			//swapState[panelNum-1] = true;
 		}
     }
