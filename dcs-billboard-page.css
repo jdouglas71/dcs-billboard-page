@@ -81,6 +81,14 @@ hr.blue-line {
     vertical-align: top;
 }
 
+.hover-class {
+    list-style-image: url('./images/blue-dot.png');
+    font-size: 280%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    vertical-align: top;
+}
+
 #bg-panel-3 { 
 	background-image: url(./images/panel3.png);
     background-repeat: no-repeat;

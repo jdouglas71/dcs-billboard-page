@@ -74,15 +74,15 @@ function dcs_billboard_page_getPanel($index)
 			break;
         case 2:
             $retval .= "<div class='bg-panel' id='bg-panel-2'>";
-            $retval .= "<div class='left'>";
-            $retval .= "<ul>";
-            $retval .= "<li>Connect anywhere there's WIFI -- no other devices or wires required.</li>";
-            $retval .= "<li>Download your favorite apps and content right onto the touchjet pond.</li>";
-            $retval .= "<li>Control your apps right on the wall with a stylus or air mouse.</li>";
-            $retval .= "</ul>";
-            $retval .= "</div><div class='right'>";
-            $retval .= "<hr class='blue-line'>";
-            $retval .= "</div>";
+            $retval .= "    <div class='left'>";
+            $retval .= "        <ul id='bullet-points'>";
+            $retval .= "            <li id='one'>Connect anywhere there's WIFI -- no other devices or wires required.</li>";
+            $retval .= "            <li id='two'>Download your favorite apps and content right onto the touchjet pond.</li>";
+            $retval .= "            <li id='three'>Control your apps right on the wall with a stylus or air mouse.</li>";
+            $retval .= "        </ul>";
+            $retval .= "    </div><div class='right'>";
+            $retval .= "        <hr class='blue-line'>";
+            $retval .= "    </div>";
             $retval .= "</div>";
             break;
         case 6:

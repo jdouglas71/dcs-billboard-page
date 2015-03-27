@@ -151,7 +151,7 @@ jQuery(document).ready(function()  {
      */
     function swapPanelImages(panelNum)
     {
-		if( !swapState[panelNum-1] )
+		if( !swapState[panelNum-1] && ($oldPanel != panelNum) )
 		{
             console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
