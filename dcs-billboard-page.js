@@ -50,9 +50,9 @@ jQuery(document).ready(function()  {
     {
         curPos = topLimit;        
         setTimeout( function() {
-            $sprite.animate({ top : curPos },400,"linear");
+            $sprite.animate({ top : curPos },1000,"linear");
             swapPanelImages( 1 );
-        }, 2000);
+        }, 1000);
     }
 
     jQuery(window).scroll(function() {
@@ -78,7 +78,7 @@ jQuery(document).ready(function()  {
             moveIt = false;
             //console.log( "lower window zone" );
         }
-        if( curPos < (yPos + 200) && (deltaY < 0) )  {
+        if( curPos < (yPos + topLimit) && (deltaY < 0) )  {
             moveIt = false;        
             //console.log( "Upper window limit" );
         }
@@ -86,8 +86,10 @@ jQuery(document).ready(function()  {
 
         if( moveIt )
 		{
-            var velocity = 2;
-            $sprite.css( { 'top' : curPos+(deltaY*velocity) } );
+            var velocity = 1.3;
+            var delta = deltaY*velocity;
+            //if( delta > 3 ) delta = 3;
+            $sprite.css( { 'top' : curPos+delta } );
 	    }
     }); 
 

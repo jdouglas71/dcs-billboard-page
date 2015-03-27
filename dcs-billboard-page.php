@@ -96,9 +96,9 @@ function dcs_billboard_page_getPanel($index)
         case 7:
 	    	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
-	        $retval .= "<div style='margin: 10px auto;width:2%;'>";
-            $retval .= "<a class='buy-button' href='".site_url("/buy")."'>Buy</a>";
-            $retval .= "</div>";
+	        $retval .= "    <div style='margin: 10px auto;width:15%;'>";
+            $retval .= "        <a class='buy-button' href='".site_url("/buy")."'>Buy</a>";
+            $retval .= "    </div>";
 		    $retval .= "</div>";
             break;
 	default:
