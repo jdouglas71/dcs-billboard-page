@@ -26,6 +26,8 @@
 
 section.bg-panel { 
 	margin-top: -25px;
+	max-width: 1500px;
+	width: 100%;
 }
 
 #dcs-bg-panel  {
