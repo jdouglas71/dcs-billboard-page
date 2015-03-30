@@ -24,6 +24,10 @@
     top: -300px;
 }
 
+section.bg-panel { 
+	margin-top: -35px;
+}
+
 #dcs-bg-panel  {
    	margin: 0 auto;
 	width: 85%;
