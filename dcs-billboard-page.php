@@ -89,7 +89,8 @@ function dcs_billboard_page_getPanel($index)
            	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
            	$retval .= "    <div class='learn-more'>";
-            $retval .= "        <a href='".site_url("/features")."'>Learn More></a>";
+            $retval .= "        <a name='features' style='position:relative;padding-top:400px;'>";
+            $retval .= "        <a href='".site_url("/features")."'>Learn More></a></a>";
 			$retval .= "    </div>";
 			$retval .= "</div>";
             break;

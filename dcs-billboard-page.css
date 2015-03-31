@@ -143,10 +143,10 @@ a.buy-button:hover,  a.buy-button:focus {
 }
 
 div.learn-more {
-    background-color: white;    
-    margin-left: 24px;
+    background-color: transparent;    
+    margin-left: 1px;
     width: 20%;
-    bottom: 45%;
+    bottom: 0;
     position: relative;
 }
 
