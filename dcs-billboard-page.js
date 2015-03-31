@@ -13,12 +13,14 @@ jQuery(document).ready(function()  {
 	$window = jQuery(window);
     var $oldPanel = 0;
     var $oldYPos = 0;
-    var $deltaV = 0;
-
+    var $deltaY = 0;
+    
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 738, 364, 600, 600, 600, 531, 614);
-	var scaleFactor = 1.0;
+    var panelSizes = new Array( 1475, 728, 1200, 1200, 1200, 753, 1291);
+	var scaleFactor = 0.5;
+	var panelWidth = 2400; //Starting image widths
+	var displayWidth = panelWidth * scaleFactor;
     //Calculate the size of the section based on all the panels and set it. 
     var sectionSize = 0, i = 0;
     for(i=0; i < panelSizes.length; i++)
@@ -31,16 +33,19 @@ jQuery(document).ready(function()  {
 	 */
 	i = 0;
 	jQuery('div.bg-panel').each(function() {
-		jQuery(this).height(Math.round(panelSizes[i++]*scaleFactor));
-		jQuery(this).width(1200);
+		jQuery(this).height(panelSizes[i++]*scaleFactor);
+		jQuery(this).width(displayWidth);
 	});
+
+	/**Always scroll to the top on load */
+    //$window.scrollToTop();
 
 	/** Track the "Swap state" of the panels. 2,6 and 7 don't have swap panels.*/
 	var swapState = new Array( false, true, false, false, false, true, true );
 	
     /** Foreground Section Processing */
-    var topLimit = 600; //As measured from top
-    var bottomLimit = 3140; //As measured from bottom
+    var topLimit = 1200*scaleFactor; //As measured from top
+    var bottomLimit = (5803+300)*scaleFactor; //As measured from bottom
 	/**
 	 * Move the sprite section.
 	 */
@@ -57,8 +62,7 @@ jQuery(document).ready(function()  {
 
     jQuery(window).scroll(function() {
 		var yPos = $window.scrollTop();
-        var deltaY = yPos - $oldYPos; 
-        $deltaV += deltaY;
+        $deltaY = yPos - $oldYPos; 
         $oldYPos = yPos;
         var winHeight = $window.height();
 		var curPos = parseInt($sprite.css('top'),10);
@@ -66,28 +70,30 @@ jQuery(document).ready(function()  {
         var curPanelEdge = getCurrentPanelEdge( curPos );
         var diff = yPos + winHeight - curPanelEdge;
 
+		//Determine if to move
         var moveIt = true;
-        if( curPos > bottomLimit && (deltaY > 0) ) {
+        if( curPos > bottomLimit && ($deltaY > 0) ) {
              moveIt = false; 
             //console.log( "Past bottom limit going down." );
         }
-        if( curPos < topLimit && (deltaY < 0) )  {
+        if( curPos < topLimit && ($deltaY < 0) )  {
             moveIt = false;
         }
-        if( curPos > (yPos + winHeight - 250) && (deltaY > 0) ) {
+        if( curPos > (yPos + winHeight - 250) && ($deltaY > 0) ) {
             moveIt = false;
             //console.log( "lower window zone" );
         }
-        if( curPos < (yPos + topLimit) && (deltaY < 0) )  {
+        if( curPos < (yPos + topLimit) && ($deltaY < 0) )  {
             moveIt = false;        
             //console.log( "Upper window limit" );
         }
+        //Triggers panel swapping
         isNearPanelEdge( curPos );
-
+		//Move the sprite
         if( moveIt )
 		{
             var velocity = 1.3;
-            var delta = deltaY*velocity;
+            var delta = $deltaY*velocity;
             //if( delta > 3 ) delta = 3;
             $sprite.css( { 'top' : curPos+delta } );
 	    }
