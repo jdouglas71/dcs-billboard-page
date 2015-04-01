@@ -110,9 +110,9 @@ jQuery(document).ready(function()  {
     	for(i=0; i<panelSizes.length; i++)
     	{
     		nearEdge = farEdge;
-    		console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
+    		//console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
     		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
-    		console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		//console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
     		if( curPos > nearEdge && curPos < farEdge )
     		{
     			return (i+1);
@@ -177,10 +177,7 @@ jQuery(document).ready(function()  {
 		{
             console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
-            //if( $oldPanel != 0 ) 
-            //    jQuery('img#bg-panel-'+ $oldPanel).toggleClass("transparent");
             $oldPanel = panelNum;
-			//swapState[panelNum-1] = true;
 		}
     }
 }); 
