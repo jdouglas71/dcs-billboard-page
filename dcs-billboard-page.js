@@ -129,11 +129,14 @@ jQuery(document).ready(function()  {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
 		var panelSize = panelSizes[panelNum-1]*scaleFactor;
+		
+		//If the panel numbers change, swap the old one back.
+		if( panelNum != $oldPanel ) 
+                jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
+                
         if( $deltaY > 0 )
         {   
         	//Going down
-        	if( panelNum != $oldPanel ) 
-                jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
 	        var delta = getCurrentPanelEdge(curPos) - curPos;
             //We only care if we're in a swappable panel.
             if( !swapState[panelNum-1] ) 
