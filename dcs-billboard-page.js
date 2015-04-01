@@ -27,7 +27,7 @@ jQuery(document).ready(function()  {
     {   
         sectionSize += Math.round(panelSizes[i]*scaleFactor);
     }
-
+    
 	/**                                          
 	 * Set the heights of the panel divs.
 	 */
@@ -66,6 +66,8 @@ jQuery(document).ready(function()  {
         $oldYPos = yPos;
         var winHeight = $window.height();
 		var curPos = parseInt($sprite.css('top'),10);
+		var panelNum = getPanelNumber( curPos );
+		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + panelNum + " " + curPos );
 	    var ratio = 2.5;
         var curPanelEdge = getCurrentPanelEdge( curPos );
         var diff = yPos + winHeight - curPanelEdge;
@@ -98,22 +100,25 @@ jQuery(document).ready(function()  {
             $sprite.css( { 'top' : curPos+delta } );
 	    }
     }); 
-
-	/**
-	 * Get the panel number based on curPos.
-	 */
-	function getPanelNumber(curPos)
-	{
-		var i = 1;
-		var total = panelSizes[0]*scaleFactor;
-		for(i=1; i<panelSizes.length; i++, total += panelSizes[i]*scaleFactor)
-		{
-			if( curPos < total )
-			{
-				return i;
-			}
-		}
-	}
+    
+    /**
+    * Get the Panel number based on curPos.
+    */
+    function getPanelNumber(curPos)
+    {
+    	var i = 0, farEdge = 0, nearEdge = 0, tmpVal = 0;
+    	for(i=0; i<panelSizes.length; i++)
+    	{
+    		nearEdge = farEdge;
+    		console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
+    		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
+    		console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		if( curPos > nearEdge && curPos < farEdge )
+    		{
+    			return (i+1);
+    		}
+        }
+    }
 
     /**
      * Return true if close to (swappable) panel edge.
@@ -123,18 +128,28 @@ jQuery(document).ready(function()  {
     {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
-        var delta = getCurrentPanelEdge(curPos) - curPos;
-        //console.log( "curPanelEdge: " + curPanelEdge );
-        if( (delta < 305) && (delta >= 0) )
+		var panelSize = panelSizes[panelNum-1]*scaleFactor;
+        if( $deltaY > 0 )
         {   
+        	//Going down
+        	if( panelNum != $oldPanel ) 
+                jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
+	        var delta = getCurrentPanelEdge(curPos) - curPos;
             //We only care if we're in a swappable panel.
             if( !swapState[panelNum-1] ) 
             {
                 //console.log( "SLOWER DOWN!" );
                 retval = true;
-                if( delta < 250 ) swapPanelImages(panelNum);
+                if( delta < (panelSize/2) ) swapPanelImages(panelNum);
             }
         }
+        else
+        {
+        	//Going up.
+        	var delta = curPos - getCurrentPanelEdge(curPos);
+        	if( delta < (panelSize*.95) ) swapPanelImages(panelNum);
+        }
+        
         return retval;
     }
 
@@ -145,6 +160,7 @@ jQuery(document).ready(function()  {
     {
         var i = 0, curPanelEdge = 0;
         var panelNum = getPanelNumber(curPos);
+        if( $deltaY < 0 ) panelNum--; //If we're going up, we want the panel edge on the top.
         for(i=0; i<panelNum; i++)
         {
             curPanelEdge += panelSizes[i]*scaleFactor;
@@ -161,8 +177,8 @@ jQuery(document).ready(function()  {
 		{
             console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
-            if( $oldPanel != 0 ) 
-                jQuery('img#bg-panel-'+ $oldPanel).toggleClass("transparent");
+            //if( $oldPanel != 0 ) 
+            //    jQuery('img#bg-panel-'+ $oldPanel).toggleClass("transparent");
             $oldPanel = panelNum;
 			//swapState[panelNum-1] = true;
 		}
