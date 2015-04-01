@@ -11,6 +11,10 @@
     transform: translateY(-50%);
 }
 
+#dcs-billboard-sprite-text {
+	display: none;
+}
+
 #dcs-billboard-sprite { 
 	background: url(./images/device.png) 90% 1px no-repeat;
     background-size: 20%;
