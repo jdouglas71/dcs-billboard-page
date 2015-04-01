@@ -12,22 +12,40 @@
 }
 
 #dcs-billboard-sprite { 
-	background: url(./images/device.png) 100% 1px no-repeat;
+	background: url(./images/device.png) 90% 1px no-repeat;
     background-size: 20%;
     //background-color: #4d7fad;  
-	height: 120px;  
 	margin: 0 auto; 
     width: 100%; 
-    max-width: 1200px; 
+    height: 140px;
     position: absolute; 
 	z-index: 4;
     top: -300px;
 }
 
+@media only screen and (max-width: 1200px) {
+	#dcs-billboard-sprite { 
+		height: 140px;
+ 	}
+}
+
+@media only screen and (max-width: 900px) {
+	#dcs-billboard-sprite { 
+		height: 120px;
+ 	}
+}
+
+@media only screen and (max-width: 600px) {
+	#dcs-billboard-sprite { 
+		height: 90px;
+ 	}
+}
+
 section.bg-panel { 
 	margin-top: -25px;
-	max-width: 1900px;
+	max-width: 1500px;
 	width: 100%;
+	margin: 0 auto;
 }
 
 #dcs-bg-panel  {
@@ -37,10 +55,10 @@ section.bg-panel {
 }
 
 .bg-panel img  {
-    -webkit-transition: opacity 2s ease-in-out;
-    -moz-transition: opacity 2s ease-in-out;
-    -o-transition: opacity 2s ease-in-out;
-    transition: opacity 2s ease-in-out;
+    -webkit-transition: opacity 500ms ease-in-out;
+    -moz-transition: opacity 500ms ease-in-out;
+    -o-transition: opacity 500ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
 }
 
 .bg-panel img.transparent  {
@@ -54,6 +72,7 @@ section.bg-panel {
 }
 
 #bg-panel-2 { 
+	padding: 30px;	
 }
 
 #bg-panel-2 div.left  {
@@ -68,6 +87,14 @@ section.bg-panel {
     width: 40%;
 }
 
+#bg-panel-6 {
+	padding: 30px;
+}
+
+#bg-panel-7 {
+	padding-bottom: 25px;
+}
+
 hr.blue-line {
     border-top: 2px  #4d7fad solid;
     width: 65%; 
@@ -78,14 +105,6 @@ hr.blue-line {
     list-style-image: url('./images/gray-dot.png');
     vertical-align: top;
 }   
-
-.bg-panel ul li:hover {
-    list-style-image: url('./images/blue-dot.png');
-    font-size: 280%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    vertical-align: top;
-}
 
 .hover-class {
     list-style-image: url('./images/blue-dot.png');

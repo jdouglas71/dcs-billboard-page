@@ -1,5 +1,5 @@
 /**
- * Parallax Front Page for TouchJet.
+ * Billboard + Sprite Front Page for TouchJet.
  *  
  * Author: Jason Douglas
  */
@@ -11,43 +11,22 @@
 jQuery(document).ready(function()  {
 	// Cache the Window object
 	$window = jQuery(window);
-    var $oldPanel = 0;
-    var $oldYPos = 0;
-    var $deltaY = 0;
+    var $oldPanel = 0, $oldYPos = 0, $deltaY = 0;
+    var topLimit, bottomLimit;
     
     /** Background Section Processing */
     //The panel sizes 
     var panelSizes = new Array( 1475, 728, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
-	var displayWidth = panelWidth * scaleFactor;
-    //Calculate the size of the section based on all the panels and set it. 
-    var sectionSize = 0, i = 0;
-    for(i=0; i < panelSizes.length; i++)
-    {   
-        sectionSize += Math.round(panelSizes[i]*scaleFactor);
-    }
+
+	/** Dictates the "Swap state" of the panels. 2,6 and 7 don't have swap panels.*/
+	var swapState = new Array( true, false, true, true, true, false, false );
+	//Adjust the scale factor based on the window width.
+    processScaleFactorChange( $window.width() );
     
-	/**                                          
-	 * Set the heights of the panel divs.
-	 */
-	i = 0;
-	jQuery('div.bg-panel').each(function() {
-		jQuery(this).height(panelSizes[i++]*scaleFactor);
-		jQuery(this).width(displayWidth);
-	});
-
-	/**Always scroll to the top on load */
-    //$window.scrollToTop();
-
-	/** Track the "Swap state" of the panels. 2,6 and 7 don't have swap panels.*/
-	var swapState = new Array( false, true, false, false, false, true, true );
-	
-    /** Foreground Section Processing */
-    var topLimit = 1200*scaleFactor; //As measured from top
-    var bottomLimit = (5803+300)*scaleFactor; //As measured from bottom
 	/**
-	 * Move the sprite section.
+	 * Initial Sprite Positioning. 
 	 */
     var $sprite = jQuery('#dcs-billboard-sprite');
     var curPos = parseInt($sprite.css('top'),10);
@@ -60,6 +39,16 @@ jQuery(document).ready(function()  {
         }, 1000);
     }
 
+	/**
+	 * Handle resize events. We need to recalculate the scaleFactor
+	 */
+	jQuery(window).resize( function() {
+		processScaleFactorChange( $window.width() );
+	});
+
+	/** 
+	* React to scrolling events 
+	*/
     jQuery(window).scroll(function() {
 		var yPos = $window.scrollTop();
         $deltaY = yPos - $oldYPos; 
@@ -89,6 +78,7 @@ jQuery(document).ready(function()  {
             moveIt = false;        
             //console.log( "Upper window limit" );
         }
+        
         //Triggers panel swapping
         isNearPanelEdge( curPos );
         tweakPanelTwo( curPos );
@@ -101,6 +91,21 @@ jQuery(document).ready(function()  {
             $sprite.css( { 'top' : curPos+delta } );
 	    }
     }); 
+    
+    /**
+    * Calculate panels sizes based on scalefactor
+    */
+    function processScaleFactorChange(newWidth)
+    {
+    	scaleFactor = newWidth/2400;
+    	
+    	//This is our only flexible panel so we need to keep it sized correctly.
+    	jQuery('div#bg-panel-2').height( panelSizes[1]*scaleFactor ); 
+    	
+    	/** Foreground Section Processing */
+    	topLimit = 1200*scaleFactor; //As measured from top
+    	bottomLimit = (6043+300)*scaleFactor; //As measured from bottom
+    }
     
     /**
     * Get the Panel number based on curPos.
@@ -133,18 +138,18 @@ jQuery(document).ready(function()  {
 		
 		//If the panel numbers change, swap the old one back.
 		if( panelNum != $oldPanel ) 
-                jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
+            jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
                 
         if( $deltaY > 0 )
         {   
         	//Going down
 	        var delta = getCurrentPanelEdge(curPos) - curPos;
             //We only care if we're in a swappable panel.
-            if( !swapState[panelNum-1] ) 
+            if( swapState[panelNum-1] ) 
             {
                 //console.log( "SLOWER DOWN!" );
                 retval = true;
-                if( delta < (panelSize/2) ) swapPanelImages(panelNum);
+                if( delta < (panelSize*.67) ) swapPanelImages(panelNum);
             }
         }
         else
@@ -222,11 +227,16 @@ jQuery(document).ready(function()  {
      */
     function swapPanelImages(panelNum)
     {
-		if( !swapState[panelNum-1] && ($oldPanel != panelNum) )
+		if( swapState[panelNum-1] && ($oldPanel != panelNum) )
 		{
             console.log( "Swapping Panel: " + panelNum );
-            jQuery('img#bg-panel-'+panelNum).toggleClass("transparent");
+            jQuery('img#bg-panel-'+panelNum).addClass("transparent");
             $oldPanel = panelNum;
+		}
+		
+		if( !swapState[panelNum-1] ) 
+		{
+			$oldPanel = panelNum; //Record the panel number change anyway
 		}
     }
 }); 
@@ -234,5 +244,4 @@ jQuery(document).ready(function()  {
 /** 
  * Create HTML5 elements for IE's sake
  */
-document.createElement("article");
 document.createElement("section");

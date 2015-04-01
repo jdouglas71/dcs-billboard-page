@@ -53,7 +53,7 @@ add_shortcode( 'dcs_billboard_page', 'dcs_billboard_page_shortcode' );
 function dcs_billboard_page_getSprite()
 {
 	$retval = "<section id='dcs-billboard-sprite' data-type='sprite'>";
-	//$retval .= "<input type='text' id='dcs-billboard-sprite-text' value=''>";
+	$retval .= "<input type='text' id='dcs-billboard-sprite-text' value=''>";
 	$retval .= "</section>"; 
 	
 	return $retval;
