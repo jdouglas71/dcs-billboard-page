@@ -91,6 +91,7 @@ jQuery(document).ready(function()  {
         }
         //Triggers panel swapping
         isNearPanelEdge( curPos );
+        tweakPanelTwo( curPos );
 		//Move the sprite
         if( moveIt )
 		{
@@ -154,6 +155,51 @@ jQuery(document).ready(function()  {
         }
         
         return retval;
+    }
+    
+    /**
+    * Panel Two tweaks.
+    */
+    function tweakPanelTwo(curPos)
+    {
+    	 var topEdge = panelSizes[0]*scaleFactor;
+    	 var bottomEdge = topEdge + (panelSizes[1]*scaleFactor);
+    	 var aThird = (bottomEdge - topEdge)/3;
+    	 var spriteHeight = $sprite.height();
+    	 
+    	 //console.log( "bottomEdge: " + bottomEdge + " topEdge: " + topEdge );
+    	 //console.log( "curPos: " + curPos + " sprite height: " + spriteHeight);
+    	 
+    	 var pos = curPos + spriteHeight;
+    	 
+    	 if( (pos > topEdge) && (pos < (topEdge+aThird)) ) 
+    	 {
+    	 	//console.log( "Panel 2, First Third" );
+    	 	jQuery("li#one").addClass("hover-class");
+    	 	jQuery("li#two").removeClass("hover-class");
+    	 	jQuery("li#three").removeClass("hover-class");
+    	 }
+    	 else if( (pos > (topEdge+aThird)) && (pos < (topEdge+(aThird*2))) ) 
+    	 {
+    	 	//console.log( "Panel 2, Second Third" );
+    	 	jQuery("li#one").removeClass("hover-class");
+    	 	jQuery("li#two").addClass("hover-class");
+    	 	jQuery("li#three").removeClass("hover-class");
+    	 }
+    	 else if( (pos > (topEdge+(aThird*2)) && (pos < bottomEdge)) ) 
+    	 {
+    	 	//console.log( "Panel 2, Third" );
+    	 	jQuery("li#one").removeClass("hover-class");
+    	 	jQuery("li#two").removeClass("hover-class");
+    	 	jQuery("li#three").addClass("hover-class");
+    	 }
+    	 else
+    	 {
+    	 	//console.log( "Not in Panel 2" );
+    	 	jQuery("li#one").removeClass("hover-class");
+    	 	jQuery("li#two").removeClass("hover-class");
+    	 	jQuery("li#three").removeClass("hover-class");
+    	 }
     }
 
     /**
