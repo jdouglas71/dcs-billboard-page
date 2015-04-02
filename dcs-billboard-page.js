@@ -30,14 +30,15 @@ jQuery(document).ready(function()  {
 	 */
     var $sprite = jQuery('#dcs-billboard-sprite');
     var curPos = parseInt($sprite.css('top'),10);
-	if( isNaN(curPos) || curPos <= 0 ) 
-    {
-        curPos = topLimit;        
-        setTimeout( function() {
-            $sprite.animate({ top : curPos },1000,"linear");
-            swapPanelImages( 1 );
-        }, 1000);
-    }
+    curPos = massageCurrentPosition( curPos );
+    /** Move the sprite */
+    setTimeout( function() {
+        $sprite.animate({ top : curPos },1000,"linear");
+        swapPanelImages( 1 );
+    }, 1000);
+    /** Handle any swapping */
+    isNearPanelEdge( curPos );
+    tweakPanelTwo( curPos );
 
 	/**
 	 * Handle resize events. We need to recalculate the scaleFactor
@@ -49,7 +50,7 @@ jQuery(document).ready(function()  {
 	/** 
 	* React to scrolling events 
 	*/
-    jQuery(window).scroll(function() {
+    jQuery(window).scroll(function()  {
 		var yPos = $window.scrollTop();
         $deltaY = yPos - $oldYPos; 
         $oldYPos = yPos;
@@ -60,6 +61,13 @@ jQuery(document).ready(function()  {
 	    var ratio = 2.5;
         var curPanelEdge = getCurrentPanelEdge( curPos );
         var diff = yPos + winHeight - curPanelEdge;
+        
+        //var newCurPos = massageCurrentPosition( curPos );
+        //if( newCurPos != curPos )
+       // {
+       // 	$sprite.animate( {top:newCurPos}, 500, "linear" );
+       // 	curPos = newCurPos;
+       // }	
 
 		//Determine if to move
         var moveIt = true;
@@ -89,8 +97,10 @@ jQuery(document).ready(function()  {
             if( isNearEdge ) velocity = 0.75;
             //console.log( "Velocity: " + velocity );
             var delta = $deltaY*velocity;
-            //if( delta > 3 ) delta = 3;
-            $sprite.css( { 'top' : curPos+delta } );
+            //if( Math.abs(delta) > 3 )         
+            //	$sprite.animate({ 'top' : curPos+delta },400,"swing");
+            //else 
+            	$sprite.css( { 'top' : curPos+delta } );
 	    }
     }); 
     
@@ -118,9 +128,9 @@ jQuery(document).ready(function()  {
     	for(i=0; i<panelSizes.length; i++)
     	{
     		nearEdge = farEdge;
-    		//console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
+    		console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
     		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
-    		//console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
     		if( curPos > nearEdge && curPos < farEdge )
     		{
     			return (i+1);
@@ -175,7 +185,11 @@ jQuery(document).ready(function()  {
         {
         	//Going up.
         	var delta = curPos - getCurrentPanelEdge(curPos);
-        	if( delta < (panelSize*.99) ) swapPanelImages(panelNum);
+        	if( delta < (panelSize*.99) ) 
+        	{
+        		console.log( "Going up, calling for swap: " + panelNum );
+        		swapPanelImages(panelNum);
+        	}
         	retval = false;
         }
         
@@ -249,7 +263,7 @@ jQuery(document).ready(function()  {
     {
 		if( swapState[panelNum-1] && ($oldPanel != panelNum) )
 		{
-            //console.log( "Swapping Panel: " + panelNum );
+            console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).addClass("transparent");
             $oldPanel = panelNum;
 		}
@@ -259,6 +273,33 @@ jQuery(document).ready(function()  {
 			$oldPanel = panelNum; //Record the panel number change anyway
 		}
     }
+    
+    /**
+     * Massage Current Postion 
+     */
+    function massageCurrentPosition(curPos)
+	{	
+	    var winTop = $window.scrollTop();
+    	var winBot = winTop + $window.height();
+
+		//If negative or not defined, start from the starting position.
+		if( isNaN(curPos) || curPos <= 0 ) 
+    	{
+        	curPos = topLimit;        
+    	}
+    	
+    	//If 
+    	if( winBot > bottomLimit || curPos > bottomLimit )
+    	{
+    		curPos = bottomLimit;
+    	}
+    	else if( curPos < winTop || curPos > winBot )
+    	{
+    		curPos = winTop + ($window.height()*0.75);
+    	}
+		return curPos;
+	}
+    
 }); 
 
 /** 
