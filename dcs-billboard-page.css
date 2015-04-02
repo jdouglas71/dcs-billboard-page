@@ -27,9 +27,9 @@
     top: -300px;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (min-width: 1200px) {
 	#dcs-billboard-sprite { 
-		height: 140px;
+		height: 180px;
  	}
 }
 
@@ -47,7 +47,7 @@
 
 section.bg-panel { 
 	margin-top: -25px;
-	max-width: 1500px;
+	//max-width: 1500px;
 	width: 100%;
 	margin: 0 auto;
 }

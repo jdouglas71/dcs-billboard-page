@@ -149,7 +149,7 @@ jQuery(document).ready(function()  {
             {
                 //console.log( "SLOWER DOWN!" );
                 retval = true;
-                if( delta < (panelSize*.67) ) swapPanelImages(panelNum);
+                if( delta < (panelSize*.5) ) swapPanelImages(panelNum);
             }
         }
         else
