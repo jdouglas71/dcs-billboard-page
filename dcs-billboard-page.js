@@ -33,18 +33,31 @@ jQuery(document).ready(function()  {
     curPos = massageCurrentPosition( curPos );
     /** Move the sprite */
     setTimeout( function() {
-        $sprite.animate({ top : curPos },1000,"linear");
+        $sprite.animate({ top : curPos },1000,"linear");   
+        //jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
         swapPanelImages( 1 );
     }, 1000);
     /** Handle any swapping */
-    isNearPanelEdge( curPos );
-    tweakPanelTwo( curPos );
+    //isNearPanelEdge( curPos );
+    //tweakPanelTwo( curPos );
 
 	/**
 	 * Handle resize events. We need to recalculate the scaleFactor
 	 */
 	jQuery(window).resize( function() {
 		processScaleFactorChange( jQuery("section.bg-panel").width() );
+		
+		/**Refresh sprite as necessary */
+		var curPos = parseInt($sprite.css('top'),10);
+    	curPos = massageCurrentPosition( curPos );
+    	/** Move the sprite */
+    	setTimeout( function() {
+        	$sprite.animate({ top : curPos },1000,"linear");
+    		swapPanelImages( 1 );
+    	}, 1000);
+		/** Handle any swapping */
+		isNearPanelEdge( curPos );
+		tweakPanelTwo( curPos );
 	});
 
 	/** 
@@ -58,17 +71,9 @@ jQuery(document).ready(function()  {
 		var curPos = parseInt($sprite.css('top'),10);
 		var panelNum = getPanelNumber( curPos );
 		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + panelNum + " " + curPos );
-	    var ratio = 2.5;
         var curPanelEdge = getCurrentPanelEdge( curPos );
         var diff = yPos + winHeight - curPanelEdge;
         
-        //var newCurPos = massageCurrentPosition( curPos );
-        //if( newCurPos != curPos )
-       // {
-       // 	$sprite.animate( {top:newCurPos}, 500, "linear" );
-       // 	curPos = newCurPos;
-       // }	
-
 		//Determine if to move
         var moveIt = true;
         if( curPos > bottomLimit && ($deltaY > 0) ) {
@@ -78,11 +83,11 @@ jQuery(document).ready(function()  {
         if( curPos < topLimit && ($deltaY < 0) )  {
             moveIt = false;
         }
-        if( curPos > (yPos + winHeight - 250) && ($deltaY > 0) ) {
+        if( curPos > (yPos + winHeight - 350) && ($deltaY > 0) ) {
             moveIt = false;
             //console.log( "lower window zone" );
         }
-        if( curPos < (yPos + topLimit) && ($deltaY < 0) )  {
+        if( curPos < (yPos + (winHeight/4)) && ($deltaY < 0) )  {
             moveIt = false;        
             //console.log( "Upper window limit" );
         }
@@ -97,10 +102,14 @@ jQuery(document).ready(function()  {
             if( isNearEdge ) velocity = 0.75;
             //console.log( "Velocity: " + velocity );
             var delta = $deltaY*velocity;
-            //if( Math.abs(delta) > 3 )         
-            //	$sprite.animate({ 'top' : curPos+delta },400,"swing");
-            //else 
-            	$sprite.css( { 'top' : curPos+delta } );
+            if( $deltaY > 0 )
+            {
+               $sprite.css( { 'top' : curPos+delta } );
+            }
+            else
+            {
+               $sprite.css( { 'top' : curPos+delta } );
+            }
 	    }
     }); 
     
@@ -128,9 +137,9 @@ jQuery(document).ready(function()  {
     	for(i=0; i<panelSizes.length; i++)
     	{
     		nearEdge = farEdge;
-    		console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
+    		//console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
     		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
-    		console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		//console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
     		if( curPos > nearEdge && curPos < farEdge )
     		{
     			return (i+1);
@@ -185,6 +194,7 @@ jQuery(document).ready(function()  {
         {
         	//Going up.
         	var delta = curPos - getCurrentPanelEdge(curPos);
+        	console.log( "Going up -- delta:" + delta );
         	if( delta < (panelSize*.99) ) 
         	{
         		console.log( "Going up, calling for swap: " + panelNum );
@@ -204,7 +214,7 @@ jQuery(document).ready(function()  {
     	 var topEdge = panelSizes[0]*scaleFactor;
     	 var bottomEdge = topEdge + (panelSizes[1]*scaleFactor);
     	 var aThird = (bottomEdge - topEdge)/3;
-    	 var spriteHeight = $sprite.height();
+    	 var spriteHeight = 70;
     	 
     	 //console.log( "bottomEdge: " + bottomEdge + " topEdge: " + topEdge );
     	 //console.log( "curPos: " + curPos + " sprite height: " + spriteHeight);
@@ -213,7 +223,7 @@ jQuery(document).ready(function()  {
     	 
     	 if( (pos > topEdge) && (pos < (topEdge+aThird)) ) 
     	 {
-    	 	//console.log( "Panel 2, First Third" );
+    	 	///console.log( "Panel 2, First Third" );
     	 	jQuery("li#one").addClass("hover-class");
     	 	jQuery("li#two").removeClass("hover-class");
     	 	jQuery("li#three").removeClass("hover-class");
@@ -263,7 +273,7 @@ jQuery(document).ready(function()  {
     {
 		if( swapState[panelNum-1] && ($oldPanel != panelNum) )
 		{
-            console.log( "Swapping Panel: " + panelNum );
+            //console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).addClass("transparent");
             $oldPanel = panelNum;
 		}
@@ -287,16 +297,22 @@ jQuery(document).ready(function()  {
     	{
         	curPos = topLimit;        
     	}
+ 
+    	//If the sprite isn't being shown in the current window, put it at the 3/4 mark in the window.
+    	if( curPos < winTop || curPos > winBot )
+    	{
+    		curPos = winTop + ($window.height()*0.65);
+    	}   	
     	
-    	//If 
+    	//If we've scrolled past the bottomLimit or the sprite somehow got painted below the
+    	//bottom limit, place the sprite at the bottom limit.
     	if( winBot > bottomLimit || curPos > bottomLimit )
     	{
     		curPos = bottomLimit;
     	}
-    	else if( curPos < winTop || curPos > winBot )
-    	{
-    		curPos = winTop + ($window.height()*0.75);
-    	}
+    	
+    	console.log( "Massage position: " + curPos );
+    	
 		return curPos;
 	}
     

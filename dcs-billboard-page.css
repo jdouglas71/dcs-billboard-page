@@ -81,14 +81,14 @@ section.bg-panel {
 
 #bg-panel-2 div.left  {
     float: left;
-    width: 60%;
+    width: 50%;
     padding-top: 40px;
     padding-left: 50px;
 }
 
 #bg-panel-2 div.right {
     float: right;
-    width: 40%;
+    width: 50%;
 }
 
 #bg-panel-6 {
@@ -112,9 +112,9 @@ hr.blue-line {
 
 .hover-class {
     list-style-image: url('./images/blue-dot.png');
-    font-size: 280%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-size: 200%;
+    //padding-top: 20px;
+    //padding-bottom: 20px;
     vertical-align: top;
 }
 
