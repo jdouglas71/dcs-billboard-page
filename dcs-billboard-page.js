@@ -4,10 +4,6 @@
  * Author: Jason Douglas
  */
 
-/**
- * TODO: Handle scaling.
- */
-
 jQuery(document).ready(function()  {
 	// Cache the Window object
 	$window = jQuery(window);
@@ -34,12 +30,8 @@ jQuery(document).ready(function()  {
     /** Move the sprite */
     setTimeout( function() {
         $sprite.animate({ top : curPos },1000,"linear");   
-        //jQuery('img#bg-panel-'+ $oldPanel).removeClass("transparent");
         swapPanelImages( 1 );
     }, 1000);
-    /** Handle any swapping */
-    //isNearPanelEdge( curPos );
-    //tweakPanelTwo( curPos );
 
 	/**
 	 * Handle resize events. We need to recalculate the scaleFactor
@@ -227,12 +219,12 @@ jQuery(document).ready(function()  {
     	 var topEdge = panelSizes[0]*scaleFactor;
     	 var bottomEdge = topEdge + (panelSizes[1]*scaleFactor);
     	 var aThird = (bottomEdge - topEdge)/3;
-    	 var spriteHeight = 70;
+    	 var spriteHeight = jQuery('#dcs_billboard_sprite').height();
     	 
     	 //console.log( "bottomEdge: " + bottomEdge + " topEdge: " + topEdge );
     	 //console.log( "curPos: " + curPos + " sprite height: " + spriteHeight);
     	 
-    	 var pos = curPos + spriteHeight;
+    	 var pos = curPos + (spriteHeight/2);
     	 
     	 if( (pos > topEdge) && (pos < (topEdge+aThird)) ) 
     	 {
@@ -348,7 +340,7 @@ jQuery(document).ready(function()  {
     		curPos = bottomLimit;
     	}
     	
-    	//console.log( "Massage position: " + curPos );
+    	console.log( "Massage position: " + curPos );
     	
 		return curPos;
 	}
