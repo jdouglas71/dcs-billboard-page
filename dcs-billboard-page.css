@@ -27,24 +27,6 @@
     top: -300px;
 }
 
-@media only screen and (min-width: 1200px) {
-	#dcs-billboard-sprite { 
-		height: 180px;
- 	}
-}
-
-@media only screen and (max-width: 900px) {
-	#dcs-billboard-sprite { 
-		height: 120px;
- 	}
-}
-
-@media only screen and (max-width: 600px) {
-	#dcs-billboard-sprite { 
-		height: 90px;
- 	}
-}
-
 section.bg-panel { 
 	margin-top: -50px;
 	//max-width: 1500px;

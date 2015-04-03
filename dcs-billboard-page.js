@@ -123,6 +123,9 @@ jQuery(document).ready(function()  {
     	//This is our only flexible panel so we need to keep it sized correctly.
     	jQuery('div#bg-panel-2').height( panelSizes[1]*scaleFactor ); 
     	
+    	//Scale the sprite height
+    	jQuery('#dcs-billboard-sprite').height( newWidth/10 );
+    	
     	/** Foreground Section Processing */
     	topLimit = 1200*scaleFactor; //As measured from top
     	bottomLimit = (5960+300)*scaleFactor; //As measured from bottom
