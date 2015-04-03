@@ -76,46 +76,66 @@ section.bg-panel {
 }
 
 #bg-panel-2 { 
-	padding: 30px;	
+	padding-top: 40px;
+	width: 100%;
 }
 
 #bg-panel-2 div.left  {
     float: left;
-    width: 50%;
-    padding-top: 40px;
-    padding-left: 50px;
+	width: 50%;
+    vertical-align: middle;
 }
 
 #bg-panel-2 div.right {
     float: right;
     width: 50%;
+    vertical-align: middle;
 }
 
-#bg-panel-6 {
-	padding: 30px;
+#one, #two, #three {
+	height: 33%;
+	margin: auto 0;
+	vertical-align: middle;
+	line-height: 55px;
+	color: transparent;
+	text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	//transition: all 0.4s ease;
+	margin-top: 25px;
 }
 
-#bg-panel-7 {
-	padding-bottom: 25px;
+#one img, #two img, #three img  {
+	vertical-align: middle;
+	height: 100%;
+}
+
+.line-img { 
+	float: left;
+	background-image: url(./images/gray-dot.png);
+	width: 55px;
+	background-repeat: no-repeat;
+	height: 55px;
+	background-position: top left;
+	margin-left: 30px;
 }
 
 hr.blue-line {
-    border-top: 2px  #4d7fad solid;
+    border-top: 1px #4d7fad solid;
     width: 65%; 
     margin: 0 auto;
 }
 
-.bg-panel ul {
-    list-style-image: url('./images/gray-dot.png');
-    vertical-align: top;
-}   
-
 .hover-class {
-    list-style-image: url('./images/blue-dot.png');
-    font-size: 200%;
-    //padding-top: 20px;
-    //padding-bottom: 20px;
-    vertical-align: top;
+    font-size: 220%;
+    color: #767676 !important;
+    text-shadow: none !important;
+}
+
+#bg-panel-6 {
+	padding: 20px;
+}
+
+#bg-panel-7 {
+	padding-bottom: 25px;
 }
 
 #bg-panel-3 { 
@@ -152,7 +172,7 @@ a.buy-button {
     background-color: #2b84c6;
     color: white;
     font-size: 150%;
-    font-weight: bold;
+    font-weight: normal;
     padding: 10px 25px;
     border-radius: 5px;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0,0,0,0.2);
@@ -171,6 +191,7 @@ div.learn-more {
     width: 20%;
     bottom: 0;
     position: relative;
+    padding-left: 20px;
 }
 
 div.learn-more a {

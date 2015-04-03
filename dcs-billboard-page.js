@@ -16,7 +16,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1475, 728, 1200, 1200, 1200, 753, 1291);
+    var panelSizes = new Array( 1475, 620, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 
@@ -125,7 +125,7 @@ jQuery(document).ready(function()  {
     	
     	/** Foreground Section Processing */
     	topLimit = 1200*scaleFactor; //As measured from top
-    	bottomLimit = (6143+300)*scaleFactor; //As measured from bottom
+    	bottomLimit = (5960+300)*scaleFactor; //As measured from bottom
     }
     
     /**
@@ -137,12 +137,22 @@ jQuery(document).ready(function()  {
     	for(i=0; i<panelSizes.length; i++)
     	{
     		nearEdge = farEdge;
-    		//console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
+    		console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
     		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
-    		//console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
-    		if( curPos > nearEdge && curPos < farEdge )
+    		console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		if( $deltaY > 0 )
     		{
-    			return (i+1);
+    			if( curPos > nearEdge && curPos < farEdge )
+    			{
+    				return (i+1);
+    			}
+    		}
+    		else
+    		{
+    			if( curPos > nearEdge && curPos < farEdge )
+    			{
+    				return (i+1);
+    			}
     		}
         }
     }
@@ -194,10 +204,10 @@ jQuery(document).ready(function()  {
         {
         	//Going up.
         	var delta = curPos - getCurrentPanelEdge(curPos);
-        	console.log( "Going up -- delta:" + delta );
+        	//console.log( "Going up -- delta:" + delta );
         	if( delta < (panelSize*.99) ) 
         	{
-        		console.log( "Going up, calling for swap: " + panelNum );
+        		//console.log( "Going up, calling for swap: " + panelNum );
         		swapPanelImages(panelNum);
         	}
         	retval = false;
@@ -224,30 +234,54 @@ jQuery(document).ready(function()  {
     	 if( (pos > topEdge) && (pos < (topEdge+aThird)) ) 
     	 {
     	 	///console.log( "Panel 2, First Third" );
-    	 	jQuery("li#one").addClass("hover-class");
-    	 	jQuery("li#two").removeClass("hover-class");
-    	 	jQuery("li#three").removeClass("hover-class");
+			jQuery("#one div.line-img").height( "110px" );
+    	 	jQuery("#one").addClass("hover-class");
+    	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
+    	 	jQuery("#two").removeClass("hover-class");
+   	 		jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+ 			jQuery("#two div.line-img").height( "55px" );
+    	 	jQuery("#three").removeClass("hover-class");
+    	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+ 			jQuery("#three div.line-img").height( "55px" );
     	 }
     	 else if( (pos > (topEdge+aThird)) && (pos < (topEdge+(aThird*2))) ) 
     	 {
     	 	//console.log( "Panel 2, Second Third" );
-    	 	jQuery("li#one").removeClass("hover-class");
-    	 	jQuery("li#two").addClass("hover-class");
-    	 	jQuery("li#three").removeClass("hover-class");
-    	 }
+    	 	jQuery("#one").removeClass("hover-class");
+			jQuery("#one div.line-img").height( "55px" );
+    	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+    	 	jQuery("#two").addClass("hover-class");
+			jQuery("#two div.line-img").height( "110px" );
+    	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
+    	 	jQuery("#three").removeClass("hover-class");
+			jQuery("#three div.line-img").height( "55px" );
+     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+   	 }
     	 else if( (pos > (topEdge+(aThird*2)) && (pos < bottomEdge)) ) 
     	 {
     	 	//console.log( "Panel 2, Third" );
-    	 	jQuery("li#one").removeClass("hover-class");
-    	 	jQuery("li#two").removeClass("hover-class");
-    	 	jQuery("li#three").addClass("hover-class");
+    	 	jQuery("#one").removeClass("hover-class");
+			jQuery("#one div.line-img").height( "55px" );
+    	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+    	 	jQuery("#two").removeClass("hover-class");
+			jQuery("#two div.line-img").height( "55px" );
+    	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+    	 	jQuery("#three").addClass("hover-class");
+			jQuery("#three div.line-img").height( "110px" );
+    	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
     	 }
     	 else
     	 {
     	 	//console.log( "Not in Panel 2" );
-    	 	jQuery("li#one").removeClass("hover-class");
-    	 	jQuery("li#two").removeClass("hover-class");
-    	 	jQuery("li#three").removeClass("hover-class");
+    	 	jQuery("#one").removeClass("hover-class");
+    	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+			jQuery("#one div.line-img").height( "55px" );
+    	 	jQuery("#two").removeClass("hover-class");
+    	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+			jQuery("#two div.line-img").height( "55px" );
+    	 	jQuery("#three").removeClass("hover-class");
+    	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
+			jQuery("#three div.line-img").height( "55px" );
     	 }
     }
 
@@ -311,7 +345,7 @@ jQuery(document).ready(function()  {
     		curPos = bottomLimit;
     	}
     	
-    	console.log( "Massage position: " + curPos );
+    	//console.log( "Massage position: " + curPos );
     	
 		return curPos;
 	}

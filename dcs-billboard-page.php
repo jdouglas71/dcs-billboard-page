@@ -77,17 +77,33 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "</div>";
 			break;
         case 2:
-            $retval .= "<div class='bg-panel' id='bg-panel-2'>";
-            $retval .= "    <div class='left'>";
-            $retval .= "        <ul id='bullet-points'>";
-            $retval .= "            <li id='one'>Connect anywhere there's WIFI -- no other devices or wires required.</li>";
-            $retval .= "            <li id='two'>Download your favorite apps and content right onto the touchjet pond.</li>";
-            $retval .= "            <li id='three'>Control your apps right on the wall with a stylus or air mouse.</li>";
-            $retval .= "        </ul>";
-            $retval .= "    </div><div class='right'>";
-            $retval .= "        <hr class='blue-line'>";
-            $retval .= "    </div>";
-            $retval .= "</div>";
+        	$retval .= "<div class='bg-panel' id='bg-panel-2'>                                                        ";
+			$retval .= "	<div class='left'>                                                                         ";
+			$retval .= "		<div id='one'>                                          ";
+			$retval .= "			<div class='line-img'></div>";
+			$retval .= "			<span>Connect anywhere there's WIFI -- no other devices or wires required.</span>           ";
+			$retval .= "		</div>                                                                                 ";
+			$retval .= "		<div id='two'>                                                                         ";
+			$retval .= "			<div class='line-img'></div>";
+			$retval .= "			<span>Download your favorite apps and content right onto the touchjet pond.</span>          ";
+			$retval .= "		</div>                                                                                 ";
+			$retval .= "		<div id='three'>                                                                       ";
+			$retval .= "			<div class='line-img'></div>";
+			$retval .= "			<span>Control your apps right on the wall with a stylus or air mouse.</span>                ";
+			$retval .= "		</div>                                                                                 ";
+			$retval .= "	</div>                                                                                     ";
+			$retval .= "	<div class='right'>                                                                        ";
+			$retval .= "		<div id='one'>                                                                         ";
+			$retval .= "				<hr class='blue-line'>                                                         ";
+			$retval .= "		</div>                                                                                 ";
+			$retval .= "		<div id='two'>                                                                         ";
+			$retval .= "				<hr class='blue-line'>                                                         ";
+			$retval .= "		</div>                                                                                 ";
+			$retval .= "		<div id='three'>                                                                       ";
+			$retval .= "				<hr class='blue-line'>                                                         ";
+			$retval .= "		</div>                                                                                 ";
+			$retval .= "	</div>                                                                                     ";
+			$retval .= "</div>                                                                                        ";
             break;
         case 6:
            	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
@@ -101,7 +117,7 @@ function dcs_billboard_page_getPanel($index)
         case 7:
 	    	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
-	        $retval .= "    <div style='margin: 10px auto;width:15%;'>";
+	        $retval .= "    <div style='margin: 10px auto;width:10%;'>";
             $retval .= "        <a class='buy-button' href='http://atouchjet.myshopify.com/collections/all'>Buy</a>";
             $retval .= "    </div>";
 		    $retval .= "</div>";
