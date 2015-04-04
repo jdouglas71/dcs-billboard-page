@@ -9,6 +9,7 @@ jQuery(document).ready(function()  {
 	$window = jQuery(window);
     var $oldPanel = 0, $oldYPos = 0, $deltaY = 0;
     var topLimit, bottomLimit;
+    var spritePos = -200;
     
     /** Background Section Processing */
     //The panel sizes 
@@ -25,11 +26,11 @@ jQuery(document).ready(function()  {
 	 * Initial Sprite Positioning. 
 	 */
     var $sprite = jQuery('#dcs-billboard-sprite');
-    var curPos = parseInt($sprite.css('top'),10);
-    curPos = massageCurrentPosition( curPos );
+    //var curPos = parseInt($sprite.css('top'),10);
+    spritePos = massageCurrentPosition( spritePos );
     /** Move the sprite */
     setTimeout( function() {
-        $sprite.animate({ top : curPos },1000,"linear");   
+		moveSprite( spritePos );
         swapPanelImages( 1 );
     }, 1000);
 
@@ -40,76 +41,37 @@ jQuery(document).ready(function()  {
 		processScaleFactorChange( jQuery("section.bg-panel").width() );
 		
 		/**Refresh sprite as necessary */
-		var curPos = parseInt($sprite.css('top'),10);
-    	curPos = massageCurrentPosition( curPos );
+	    spritePos = parseInt($sprite.css('top'),10);
+    	spritePos = massageCurrentPosition( spritePos );
     	/** Move the sprite */
     	setTimeout( function() {
-        	$sprite.animate({ top : curPos },1000,"linear");
+    		moveSprite( spritePos );
     		swapPanelImages( 1 );
     	}, 1000);
 		/** Handle any swapping */
-		isNearPanelEdge( curPos );
-		tweakPanelTwo( curPos );
+		isNearPanelEdge( spritePos );
+		tweakPanelTwo( spritePos );
 	});
 
 	/** 
 	* React to scrolling events 
 	*/
     jQuery(window).scroll(function()  {
+    	//Scroll Direction and delta
 		var yPos = $window.scrollTop();
         $deltaY = yPos - $oldYPos; 
-        $oldYPos = yPos;
-        var winHeight = $window.height();
-		var curPos = parseInt($sprite.css('top'),10);
-		var panelNum = getPanelNumber( curPos );
-		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + panelNum + " " + curPos );
-        var curPanelEdge = getCurrentPanelEdge( curPos );
-        var diff = yPos + winHeight - curPanelEdge;
-        
-		//Determine if to move
-        var moveIt = true;
-        var upperWindowZone = false, lowerWindowZone = false;
-        if( curPos > bottomLimit && ($deltaY > 0) ) {
-             moveIt = false; 
-            //console.log( "Past bottom limit going down." );
-        }
-        if( curPos < topLimit && ($deltaY < 0) )  {
-            moveIt = false;
-        }
-        if( curPos > (yPos + winHeight - 150)  && ($deltaY > 0) ) {
-            lowerWindowZone = true;
-            moveIt = false;
-            //console.log( "lower window zone" );
-        }
-        if( curPos < (yPos + (winHeight/3)) && ($deltaY < 0) )  {
-            upperWindowZone = true;
-            moveIt = false;
-            //console.log( "Upper window limit" );
-        }
-        
+        $oldYPos = yPos; 
+        console.log( "DeltaY : " + $deltaY );
+
+		spritePos = spritePos + $deltaY;
         //Triggers panel swapping
-        var isNearEdge = isNearPanelEdge( curPos );
-        tweakPanelTwo( curPos );
-		//Move the sprite
-        if( moveIt )
-		{
-            var velocity = .45;
-            if( isNearEdge ) velocity = 5;
-            if( upperWindowZone && velocity < 1 ) velocity = 1;
-            if( lowerWindowZone && velocity < 1 ) velocity = 1;
-            
-            console.log( "Velocity: " + velocity );
-            var delta = $deltaY*velocity;
-            if( $deltaY > 0 )
-            {
-               $sprite.css( { 'top' : curPos+delta } );
-            }
-            else
-            {
-               $sprite.css( { 'top' : curPos+delta } );
-            }
-	    }
-    }); 
+        var isNearEdge = isNearPanelEdge( spritePos );
+        tweakPanelTwo( spritePos );
+	
+		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .2s" } );
+		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + getPanelNumber(spritePos) + " " + spritePos );
+        moveSprite( spritePos );
+	}); 
     
     /**
     * Calculate panels sizes based on scalefactor
@@ -168,7 +130,7 @@ jQuery(document).ready(function()  {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
 		var panelSize = panelSizes[panelNum-1]*scaleFactor;
-		var swapRange = 0.45; //As measured from bottom
+		var swapRange = 0.25; //As measured from bottom
 		var speedRange = 0.85; //As measured in the middle. we go fast when this returns false.
 		var speedDelta = (panelSize*speedRange)/2; 
 		
@@ -353,6 +315,16 @@ jQuery(document).ready(function()  {
     	console.log( "Massage position: " + curPos );
     	
 		return curPos;
+	}
+	
+	/**
+	* Move Sprite
+	*/
+	function moveSprite(pos)
+	{
+		if( pos > bottomLimit || pos < topLimit ) return;
+		console.log( "Moving sprite to: " + pos );
+		jQuery('#dcs-billboard-sprite').css( { 'top' : pos } );
 	}
     
 }); 

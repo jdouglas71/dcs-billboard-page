@@ -12,7 +12,7 @@
 }
 
 #dcs-billboard-sprite-text {
-	display: none;
+	//display: none;
 }
 
 #dcs-billboard-sprite { 
@@ -25,6 +25,7 @@
     position: absolute; 
 	z-index: 4;
     top: -300px;
+    transition: top 1s;
 }
 
 section.bg-panel { 
@@ -109,6 +110,12 @@ hr.blue-line {
     font-size: 220%;
     color: #767676 !important;
     text-shadow: none !important;
+}
+
+@media only screen and (max-width:1000px)  {
+	.line-img {  }
+
+	.hover-class { font-size: 120%; }
 }
 
 #bg-panel-6 {
