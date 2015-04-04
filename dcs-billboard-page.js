@@ -68,6 +68,7 @@ jQuery(document).ready(function()  {
         
 		//Determine if to move
         var moveIt = true;
+        var upperWindowZone = false, lowerWindowZone = false;
         if( curPos > bottomLimit && ($deltaY > 0) ) {
              moveIt = false; 
             //console.log( "Past bottom limit going down." );
@@ -75,12 +76,12 @@ jQuery(document).ready(function()  {
         if( curPos < topLimit && ($deltaY < 0) )  {
             moveIt = false;
         }
-        if( curPos > (yPos + winHeight - 350) && ($deltaY > 0) ) {
-            moveIt = false;
+        if( curPos > (yPos + winHeight - 150) ) { // && ($deltaY > 0) ) {
+            lowerWindowZone = true;
             //console.log( "lower window zone" );
         }
-        if( curPos < (yPos + (winHeight/4)) && ($deltaY < 0) )  {
-            moveIt = false;        
+        if( curPos < (yPos + (winHeight/3)) ) { //&& ($deltaY < 0) )  {
+            upperWindowZone = true;
             //console.log( "Upper window limit" );
         }
         
@@ -90,9 +91,12 @@ jQuery(document).ready(function()  {
 		//Move the sprite
         if( moveIt )
 		{
-            var velocity = 2.3;
-            if( isNearEdge ) velocity = 0.75;
-            //console.log( "Velocity: " + velocity );
+            var velocity = .45;
+            if( isNearEdge ) velocity = 5;
+            if( upperWindowZone && velocity < 1 ) velocity = 1;
+            //if( lowerWindowZone && velocity < 1 ) velocity = 1;
+            
+            console.log( "Velocity: " + velocity );
             var delta = $deltaY*velocity;
             if( $deltaY > 0 )
             {
@@ -132,9 +136,9 @@ jQuery(document).ready(function()  {
     	for(i=0; i<panelSizes.length; i++)
     	{
     		nearEdge = farEdge;
-    		console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
+    		//console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
     		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
-    		console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		//console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
     		if( $deltaY > 0 )
     		{
     			if( curPos > nearEdge && curPos < farEdge )
@@ -155,14 +159,16 @@ jQuery(document).ready(function()  {
     /**
      * Return true if close to (swappable) panel edge.
      * Price is Right rules apply.
+     * JGD: THis is really becoming: SHould sprite speed up or slow down?
      */
     function isNearPanelEdge(curPos)
     {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
 		var panelSize = panelSizes[panelNum-1]*scaleFactor;
-		var swapRange = 0.5;
-		var speedRange = 0.45;
+		var swapRange = 0.45; //As measured from bottom
+		var speedRange = 0.85; //As measured in the middle. we go fast when this returns false.
+		var speedDelta = (panelSize*speedRange)/2; 
 		
 		//If the panel numbers change, swap the old one back.
 		if( panelNum != $oldPanel ) 
@@ -171,6 +177,8 @@ jQuery(document).ready(function()  {
         if( $deltaY > 0 )
         {   
         	//Going down
+        	var bottomEdge = getCurrentPanelEdge(curPos);
+        	var topEdge = bottomEdge - panelSize;
 	        var delta = getCurrentPanelEdge(curPos) - curPos;
             //We only care if we're in a swappable panel.
             if( swapState[panelNum-1] ) 
@@ -181,18 +189,18 @@ jQuery(document).ready(function()  {
                 	//console.log( "SLOWER DOWN!" );
                  	swapPanelImages(panelNum);
                 }	
-                if( (delta < (panelSize*speedRange)) )
+                if( (curPos > topEdge+speedDelta-200) && (curPos < bottomEdge-speedDelta) )
                 {
-                	retval = true;
+                	retval = true; //SLOW DOWN
                 }
             }
-            else if( (panelNum == 2) && (delta < (panelSize*speedRange)) )
+            else if( (panelNum == 2) && ((curPos > topEdge+speedDelta) && (curPos < bottomEdge-speedDelta)) )
             {
-            	retval = true;
+            	retval = true; //SLOW DOWN
             }
             else
             {
-            	retval = false;
+            	retval = false; //SPEED UP
             }
         }
         else
@@ -203,7 +211,7 @@ jQuery(document).ready(function()  {
         	if( delta < (panelSize*.99) ) 
         	{
         		//console.log( "Going up, calling for swap: " + panelNum );
-        		swapPanelImages(panelNum);
+        		swapPanelImages(panelNum, true);
         	}
         	retval = false;
         }
@@ -298,9 +306,9 @@ jQuery(document).ready(function()  {
     /**
      * Swap images
      */
-    function swapPanelImages(panelNum)
+    function swapPanelImages(panelNum, forceIt)
     {
-		if( swapState[panelNum-1] && ($oldPanel != panelNum) )
+		if( swapState[panelNum-1] && ((forceIt === true) || ($oldPanel != panelNum)) )
 		{
             //console.log( "Swapping Panel: " + panelNum );
             jQuery('img#bg-panel-'+panelNum).addClass("transparent");

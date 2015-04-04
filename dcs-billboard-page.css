@@ -12,7 +12,7 @@
 }
 
 #dcs-billboard-sprite-text {
-	display: none;
+	//display: none;
 }
 
 #dcs-billboard-sprite { 
@@ -29,7 +29,6 @@
 
 section.bg-panel { 
 	margin-top: -50px;
-	//max-width: 1500px;
 	width: 100%;
 	margin: 0 auto;
 }
