@@ -27,7 +27,7 @@ jQuery(document).ready(function()  {
 	 */
     var $sprite = jQuery('#dcs-billboard-sprite');
     //var curPos = parseInt($sprite.css('top'),10);
-    spritePos = massageCurrentPosition( spritePos );
+    spritePos = massageSpritePosition( spritePos );
     /** Move the sprite */
     setTimeout( function() {
 		moveSprite( spritePos );
@@ -42,7 +42,7 @@ jQuery(document).ready(function()  {
 		
 		/**Refresh sprite as necessary */
 	    spritePos = parseInt($sprite.css('top'),10);
-    	spritePos = massageCurrentPosition( spritePos );
+    	spritePos = massageSpritePosition( spritePos );
     	/** Move the sprite */
     	setTimeout( function() {
     		moveSprite( spritePos );
@@ -63,7 +63,7 @@ jQuery(document).ready(function()  {
         $oldYPos = yPos; 
         console.log( "DeltaY : " + $deltaY );
 
-		spritePos = spritePos + $deltaY;
+		spritePos = massageSpritePosition(spritePos + $deltaY);
         //Triggers panel swapping
         var isNearEdge = isNearPanelEdge( spritePos );
         tweakPanelTwo( spritePos );
@@ -288,10 +288,11 @@ jQuery(document).ready(function()  {
     /**
      * Massage Current Postion 
      */
-    function massageCurrentPosition(curPos)
+    function massageSpritePosition(curPos)
 	{	
 	    var winTop = $window.scrollTop();
     	var winBot = winTop + $window.height();
+    	var spriteHeight = jQuery('#dcs-billboard-sprite').height();
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 
@@ -300,7 +301,7 @@ jQuery(document).ready(function()  {
     	}
  
     	//If the sprite isn't being shown in the current window, put it at the 3/4 mark in the window.
-    	if( curPos < winTop || curPos > winBot )
+    	if( curPos < (winTop+100+spriteHeight) || curPos > (winBot-100-spriteHeight) )
     	{
     		curPos = winTop + ($window.height()*0.65);
     	}   	
@@ -322,7 +323,7 @@ jQuery(document).ready(function()  {
 	*/
 	function moveSprite(pos)
 	{
-		if( pos > bottomLimit || pos < topLimit ) return;
+		if( pos > bottomLimit ) return;
 		console.log( "Moving sprite to: " + pos );
 		jQuery('#dcs-billboard-sprite').css( { 'top' : pos } );
 	}
