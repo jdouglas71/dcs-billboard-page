@@ -76,12 +76,14 @@ jQuery(document).ready(function()  {
         if( curPos < topLimit && ($deltaY < 0) )  {
             moveIt = false;
         }
-        if( curPos > (yPos + winHeight - 150) ) { // && ($deltaY > 0) ) {
+        if( curPos > (yPos + winHeight - 150)  && ($deltaY > 0) ) {
             lowerWindowZone = true;
+            moveIt = false;
             //console.log( "lower window zone" );
         }
-        if( curPos < (yPos + (winHeight/3)) ) { //&& ($deltaY < 0) )  {
+        if( curPos < (yPos + (winHeight/3)) && ($deltaY < 0) )  {
             upperWindowZone = true;
+            moveIt = false;
             //console.log( "Upper window limit" );
         }
         
@@ -94,7 +96,7 @@ jQuery(document).ready(function()  {
             var velocity = .45;
             if( isNearEdge ) velocity = 5;
             if( upperWindowZone && velocity < 1 ) velocity = 1;
-            //if( lowerWindowZone && velocity < 1 ) velocity = 1;
+            if( lowerWindowZone && velocity < 1 ) velocity = 1;
             
             console.log( "Velocity: " + velocity );
             var delta = $deltaY*velocity;
