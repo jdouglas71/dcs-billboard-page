@@ -93,15 +93,7 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "		</div>                                                                                 ";
 			$retval .= "	</div>                                                                                     ";
 			$retval .= "	<div class='right'>                                                                        ";
-			$retval .= "		<div id='one'>                                                                         ";
-			$retval .= "				<hr class='blue-line'>                                                         ";
-			$retval .= "		</div>                                                                                 ";
-			$retval .= "		<div id='two'>                                                                         ";
-			$retval .= "				<hr class='blue-line'>                                                         ";
-			$retval .= "		</div>                                                                                 ";
-			$retval .= "		<div id='three'>                                                                       ";
-			$retval .= "				<hr class='blue-line'>                                                         ";
-			$retval .= "		</div>                                                                                 ";
+			$retval .= "		<hr class='blue-line'>                                                         ";
 			$retval .= "	</div>                                                                                     ";
 			$retval .= "</div>                                                                                        ";
             break;

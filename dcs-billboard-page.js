@@ -293,6 +293,8 @@ jQuery(document).ready(function()  {
 	    var winTop = $window.scrollTop();
     	var winBot = winTop + $window.height();
     	var spriteHeight = jQuery('#dcs-billboard-sprite').height();
+    	var panelNum = getPanelNumber(curPos);
+    	var windowPos = .8;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 
@@ -300,10 +302,11 @@ jQuery(document).ready(function()  {
         	curPos = topLimit;        
     	}
  
-    	//If the sprite isn't being shown in the current window, put it at the 3/4 mark in the window.
+    	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
     	if( curPos < (winTop+100+spriteHeight) || curPos > (winBot-100-spriteHeight) )
     	{
-    		curPos = winTop + ($window.height()*0.65);
+    		if( panelNum == 2 ) windowPos = 0.4;
+    		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
     	}   	
     	
     	//If we've scrolled past the bottomLimit or the sprite somehow got painted below the
