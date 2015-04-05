@@ -88,6 +88,8 @@ jQuery(document).ready(function()  {
     	
     	/** Foreground Section Processing */
     	topLimit = 1200*scaleFactor; //As measured from top
+    	if( topLimit > ($window.height() * 0.85) )
+    		topLimit = ($window.height() * 0.85);
     	bottomLimit = (5960+300)*scaleFactor; //As measured from bottom
     }
     
@@ -298,7 +300,9 @@ jQuery(document).ready(function()  {
     	var winBot = winTop + $window.height();
     	var spriteHeight = jQuery('#dcs-billboard-sprite').height();
     	var panelNum = getPanelNumber(curPos);
-    	var windowPos = .8;
+    	var windowPos = .85;
+    	var topWinEdge = 100;
+    	var botWinEdge = 80;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 
@@ -307,7 +311,7 @@ jQuery(document).ready(function()  {
     	}
  
     	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
-    	if( curPos < (winTop+100+spriteHeight) || curPos > (winBot-100-spriteHeight) )
+    	if( curPos < (winTop+topWinEdge+spriteHeight) || curPos > (winBot-botWinEdge-spriteHeight) )
     	{
     		if( panelNum == 2 ) windowPos = 0.4;
     		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
