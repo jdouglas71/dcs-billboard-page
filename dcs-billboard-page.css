@@ -149,13 +149,14 @@ hr.blue-line {
     margin-top: 20px;
     background-repeat: no-repeat;
     background-size: contain; 
+    background-color: white !important;
 }
 
 #bg-panel-7 { 
     margin-top: 30px;
     background-repeat: no-repeat;
     background-size: contain; 
-    background-color: #f0f0f0;
+	background-color: #ededed !important;
 }
 
 a.buy-button {     
