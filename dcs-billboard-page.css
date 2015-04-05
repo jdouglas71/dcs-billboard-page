@@ -12,7 +12,7 @@
 }
 
 #dcs-billboard-sprite-text {
-	//display: none;
+	display: none;
 }
 
 #dcs-billboard-sprite { 
@@ -156,7 +156,7 @@ hr.blue-line {
     margin-top: 30px;
     background-repeat: no-repeat;
     background-size: contain; 
-	background-color: #f2f2f2 !important;
+	background-color: #f3f2f2 !important;
 }
 
 a.buy-button {     
