@@ -102,8 +102,9 @@ section.bg-panel {
 
 hr.blue-line {
     border-top: 1px #4d7fad solid;
-    width: 65%; 
-    margin: 0 auto;
+    width: 35%; 
+    margin: 25px auto;
+    position: absolute;
 }
 
 .hover-class {
