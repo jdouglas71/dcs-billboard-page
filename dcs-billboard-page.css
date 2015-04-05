@@ -63,6 +63,7 @@ section.bg-panel {
 }
 
 #bg-panel-2 div.left  {
+	padding-top: 25px;
     float: left;
 	width: 55%;
     vertical-align: middle;
@@ -81,6 +82,7 @@ section.bg-panel {
 	line-height: 55px;
 	color: transparent;
 	text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	float: left;
 	//margin-top: 25px;
 }
 
@@ -95,7 +97,7 @@ section.bg-panel {
 	width: 55px;
 	background-size: 100%;
 	background-repeat: no-repeat;
-	height: 55px;
+	//height: 55px;
 	background-position: top left;
 	margin-left: 30px;
 }
@@ -111,7 +113,7 @@ hr.blue-line {
     font-size: 220%;
     color: #767676 !important;
     text-shadow: none !important;
-    line-height: 5o%;
+    line-height: 90% !important;
 }
 
 @media only screen and (max-width:1000px)  {
