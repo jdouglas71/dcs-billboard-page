@@ -212,7 +212,7 @@ jQuery(document).ready(function()  {
     	 	jQuery("#three").removeClass("hover-class");
     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
  			jQuery("#three div.line-img").height( "55px" );
- 			jQuery(".blue-line").css( { 'top' : topEdge+aThird } );
+ 			jQuery(".blue-line").css( { 'top' : topEdge+(aThird) } );
     	 }
     	 else if( (pos > (topEdge+aThird)) && (pos < (topEdge+(aThird*2))) ) 
     	 {
@@ -226,7 +226,7 @@ jQuery(document).ready(function()  {
     	 	jQuery("#three").removeClass("hover-class");
 			jQuery("#three div.line-img").height( "55px" );
      	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
-   	 	 	jQuery(".blue-line").css( { 'top' : topEdge+aThird+(aThird) } );
+   	 	 	jQuery(".blue-line").css( { 'top' : topEdge+aThird+(aThird/2) } );
 		 }
     	 else if( (pos > (topEdge+(aThird*2)) && (pos < bottomEdge)) ) 
     	 {
@@ -240,7 +240,7 @@ jQuery(document).ready(function()  {
     	 	jQuery("#three").addClass("hover-class");
 			jQuery("#three div.line-img").height( "110px" );
     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
-    	 	jQuery(".blue-line").css( { 'top' : topEdge+(2*aThird)+(aThird/2) } );
+    	 	jQuery(".blue-line").css( { 'top' : topEdge+(2*aThird) } );
 		 }
     	 else
     	 {

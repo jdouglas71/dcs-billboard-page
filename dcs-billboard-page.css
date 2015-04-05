@@ -58,8 +58,8 @@ section.bg-panel {
 }
 
 #bg-panel-2 { 
-	padding-top: 40px;
 	width: 100%;
+	padding-top: 15px;
 }
 
 #bg-panel-2 div.left  {
@@ -81,8 +81,7 @@ section.bg-panel {
 	line-height: 55px;
 	color: transparent;
 	text-shadow: 0 0 5px rgba(0,0,0,0.5);
-	//transition: all 0.4s ease;
-	margin-top: 25px;
+	//margin-top: 25px;
 }
 
 #one img, #two img, #three img  {
@@ -94,6 +93,7 @@ section.bg-panel {
 	float: left;
 	background-image: url(./images/gray-dot.png);
 	width: 55px;
+	background-size: 100%;
 	background-repeat: no-repeat;
 	height: 55px;
 	background-position: top left;
@@ -101,8 +101,8 @@ section.bg-panel {
 }
 
 hr.blue-line {
-    border-top: 1px #4d7fad solid;
-    width: 35%; 
+    border-top: 2px #4d7fad solid;
+    width: 15%; 
     margin: 25px auto;
     position: absolute;
 }
@@ -111,6 +111,7 @@ hr.blue-line {
     font-size: 220%;
     color: #767676 !important;
     text-shadow: none !important;
+    line-height: 5o%;
 }
 
 @media only screen and (max-width:1000px)  {
