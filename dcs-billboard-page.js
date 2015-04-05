@@ -61,14 +61,14 @@ jQuery(document).ready(function()  {
 		var yPos = $window.scrollTop();
         $deltaY = yPos - $oldYPos; 
         $oldYPos = yPos; 
-        console.log( "DeltaY : " + $deltaY );
+        //console.log( "DeltaY : " + $deltaY );
 
 		spritePos = massageSpritePosition(spritePos + $deltaY);
         //Triggers panel swapping
         var isNearEdge = isNearPanelEdge( spritePos );
         tweakPanelTwo( spritePos );
 	
-		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .2s" } );
+		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .35s ease-out" } );
 		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + getPanelNumber(spritePos) + " " + spritePos );
         moveSprite( spritePos );
 	}); 
@@ -132,7 +132,7 @@ jQuery(document).ready(function()  {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
 		var panelSize = panelSizes[panelNum-1]*scaleFactor;
-		var swapRange = 0.25; //As measured from bottom
+		var swapRange = 0.35; //As measured from bottom
 		var speedRange = 0.85; //As measured in the middle. we go fast when this returns false.
 		var speedDelta = (panelSize*speedRange)/2; 
 		
@@ -302,7 +302,7 @@ jQuery(document).ready(function()  {
     	var panelNum = getPanelNumber(curPos);
     	var windowPos = .85;
     	var topWinEdge = 100;
-    	var botWinEdge = 80;
+    	var botWinEdge = 90;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 
