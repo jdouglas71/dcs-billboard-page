@@ -13,7 +13,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1475, 620, 1200, 1200, 1200, 753, 1291);
+    var panelSizes = new Array( 1475, 620, 1200, 1200, 1216, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 
@@ -90,7 +90,7 @@ jQuery(document).ready(function()  {
     	topLimit = 1200*scaleFactor; //As measured from top
     	if( topLimit > ($window.height() * 0.85) )
     		topLimit = ($window.height() * 0.85);
-    	bottomLimit = (5960+300)*scaleFactor; //As measured from bottom
+    	bottomLimit = (6200)*scaleFactor; //As measured from bottom
     }
     
     /**
@@ -132,7 +132,7 @@ jQuery(document).ready(function()  {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
 		var panelSize = panelSizes[panelNum-1]*scaleFactor;
-		var swapRange = 0.25; //As measured from bottom
+		var swapRange = 0.75; //As measured from bottom
 		var speedRange = 0.85; //As measured in the middle. we go fast when this returns false.
 		var speedDelta = (panelSize*speedRange)/2; 
 		
@@ -203,28 +203,22 @@ jQuery(document).ready(function()  {
     	 if( (pos > topEdge) && (pos < (topEdge+aThird)) ) 
     	 {
     	 	///console.log( "Panel 2, First Third" );
-			jQuery("#one div.line-img").height( "110px" );
     	 	jQuery("#one").addClass("hover-class");
     	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
     	 	jQuery("#two").removeClass("hover-class");
    	 		jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
- 			jQuery("#two div.line-img").height( "55px" );
     	 	jQuery("#three").removeClass("hover-class");
     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
- 			jQuery("#three div.line-img").height( "55px" );
  			jQuery(".blue-line").css( { 'top' : topEdge+aThird } );
     	 }
     	 else if( (pos > (topEdge+aThird)) && (pos < (topEdge+(aThird*2))) ) 
     	 {
     	 	//console.log( "Panel 2, Second Third" );
     	 	jQuery("#one").removeClass("hover-class");
-			jQuery("#one div.line-img").height( "55px" );
     	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
     	 	jQuery("#two").addClass("hover-class");
-			jQuery("#two div.line-img").height( "110px" );
     	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
     	 	jQuery("#three").removeClass("hover-class");
-			jQuery("#three div.line-img").height( "55px" );
      	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
    	 	 	jQuery(".blue-line").css( { 'top' : topEdge+aThird+(aThird) } );
 		 }
@@ -232,13 +226,11 @@ jQuery(document).ready(function()  {
     	 {
     	 	//console.log( "Panel 2, Third" );
     	 	jQuery("#one").removeClass("hover-class");
-			jQuery("#one div.line-img").height( "55px" );
     	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
     	 	jQuery("#two").removeClass("hover-class");
-			jQuery("#two div.line-img").height( "55px" );
     	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
     	 	jQuery("#three").addClass("hover-class");
-			jQuery("#three div.line-img").height( "110px" );
+			//jQuery("#three div.line-img").height( "110px" );
     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
     	 	jQuery(".blue-line").css( { 'top' : topEdge+(2*aThird)+(aThird/2) } );
 		 }
