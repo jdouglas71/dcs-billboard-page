@@ -13,7 +13,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1475, 620, 1200, 1200, 1216, 753, 1291);
+    var panelSizes = new Array( 1475, 620, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 
@@ -68,7 +68,7 @@ jQuery(document).ready(function()  {
         var isNearEdge = isNearPanelEdge( spritePos );
         tweakPanelTwo( spritePos );
 	
-		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .35s ease-out" } );
+		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .2s ease-in-out" } );
 		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + getPanelNumber(spritePos) + " " + spritePos );
         moveSprite( spritePos );
 	}); 
@@ -90,11 +90,7 @@ jQuery(document).ready(function()  {
     	topLimit = 1200*scaleFactor; //As measured from top
     	if( topLimit > ($window.height() * 0.85) )
     		topLimit = ($window.height() * 0.85);
-<<<<<<< HEAD
-    	bottomLimit = (5900+300)*scaleFactor; //As measured from bottom
-=======
-    	bottomLimit = (6200)*scaleFactor; //As measured from bottom
->>>>>>> ticket_95
+    	bottomLimit = (6180)*scaleFactor; //As measured from bottom
     }
     
     /**
@@ -109,6 +105,7 @@ jQuery(document).ready(function()  {
     		//console.log( "panel " + (i+1) + " size: " + (panelSizes[i]*scaleFactor) );
     		farEdge = nearEdge + (panelSizes[i]*scaleFactor);
     		//console.log( "panel " + (i+1) + " top edge " + nearEdge + " bottom Edge: " + farEdge );
+    		//JGD Same for now.
     		if( $deltaY > 0 )
     		{
     			if( curPos > nearEdge && curPos < farEdge )
@@ -136,11 +133,7 @@ jQuery(document).ready(function()  {
         var retval = false;
         var panelNum = getPanelNumber(curPos);
 		var panelSize = panelSizes[panelNum-1]*scaleFactor;
-<<<<<<< HEAD
-		var swapRange = 0.35; //As measured from bottom
-=======
 		var swapRange = 0.75; //As measured from bottom
->>>>>>> ticket_95
 		var speedRange = 0.85; //As measured in the middle. we go fast when this returns false.
 		var speedDelta = (panelSize*speedRange)/2; 
 		
@@ -208,7 +201,7 @@ jQuery(document).ready(function()  {
     	 
     	 var pos = curPos + (spriteHeight/2);
     	 
-    	 if( (pos > topEdge) && (pos < (topEdge+aThird)) ) 
+    	 if( (pos < (topEdge+aThird)) ) 
     	 {
     	 	///console.log( "Panel 2, First Third" );
     	 	jQuery("#one").addClass("hover-class");
@@ -217,12 +210,7 @@ jQuery(document).ready(function()  {
    	 		jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
     	 	jQuery("#three").removeClass("hover-class");
     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
-<<<<<<< HEAD
- 			jQuery("#three div.line-img").height( "55px" );
- 			jQuery(".blue-line").show().css( { 'top' : topEdge+(aThird) } );
-=======
- 			jQuery(".blue-line").css( { 'top' : topEdge+aThird } );
->>>>>>> ticket_95
+ 			//jQuery(".blue-line").css( { 'top' : topEdge+aThird } );
     	 }
     	 else if( (pos > (topEdge+aThird)) && (pos < (topEdge+(aThird*2))) ) 
     	 {
@@ -233,9 +221,9 @@ jQuery(document).ready(function()  {
     	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
     	 	jQuery("#three").removeClass("hover-class");
      	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
-   	 	 	jQuery(".blue-line").show().css( { 'top' : topEdge+aThird+(aThird/2) } );
+   	 	 	//jQuery(".blue-line").show().css( { 'top' : topEdge+aThird+(aThird/2) } );
 		 }
-    	 else if( (pos > (topEdge+(aThird*2)) && (pos < bottomEdge)) ) 
+    	 else if( (pos > (topEdge+(aThird*2))) ) 
     	 {
     	 	//console.log( "Panel 2, Third" );
     	 	jQuery("#one").removeClass("hover-class");
@@ -245,22 +233,8 @@ jQuery(document).ready(function()  {
     	 	jQuery("#three").addClass("hover-class");
 			//jQuery("#three div.line-img").height( "110px" );
     	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/blue-dot.png)' );
-    	 	jQuery(".blue-line").show().css( { 'top' : topEdge+(2*aThird) } );
+    	 	//jQuery(".blue-line").show().css( { 'top' : topEdge+(2*aThird) } );
 		 }
-    	 else
-    	 {
-    	 	//console.log( "Not in Panel 2" );
-    	 	jQuery("#one").removeClass("hover-class");
-    	 	jQuery("#one div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
-			jQuery("#one div.line-img").height( "55px" );
-    	 	jQuery("#two").removeClass("hover-class");
-    	 	jQuery("#two div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
-			jQuery("#two div.line-img").height( "55px" );
-    	 	jQuery("#three").removeClass("hover-class");
-    	 	jQuery("#three div.line-img").css( 'background-image', 'url(wp-content/plugins/dcs-billboard-page/images/faded-blue-dot.png)' );
-			jQuery("#three div.line-img").height( "55px" );
- 			jQuery(".blue-line").css( { 'top' : "initial" } ).hide();
-    	 }
     }
 
     /**
@@ -307,7 +281,7 @@ jQuery(document).ready(function()  {
     	var panelNum = getPanelNumber(curPos);
     	var windowPos = .85;
     	var topWinEdge = 100;
-    	var botWinEdge = 90;
+    	var botWinEdge = 120;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 

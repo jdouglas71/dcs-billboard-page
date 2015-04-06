@@ -74,6 +74,7 @@ section.bg-panel {
     float: right;
     width: 45%;
     vertical-align: middle;
+    display: none;
 }
 
 #one, #two, #three {
@@ -81,8 +82,8 @@ section.bg-panel {
 	margin: auto 0;
 	vertical-align: middle;
 	line-height: 55px;
-	color: transparent;
-	text-shadow: 0 0 5px rgba(0,0,0,0.5);
+	color: #a9a9a9;
+	//text-shadow: 0 0 5px rgba(0,0,0,0.5);
 	float: left;
 	//margin-top: 25px;
 }
@@ -94,11 +95,11 @@ section.bg-panel {
 
 .line-img { 
 	float: left;
-	background-image: url(./images/gray-dot.png);
+	background-image: url(./images/faded-blue-dot.png);
 	width: 55px;
 	background-size: 100%;
 	background-repeat: no-repeat;
-	//height: 55px;
+	height: 55px;
 	background-position: top left;
 	margin-left: 30px;
 }
@@ -114,13 +115,15 @@ hr.blue-line {
     font-size: 220%;
     color: #767676 !important;
     text-shadow: none !important;
-    line-height: 90% !important;
+    line-height: 100% !important;
 }
 
 @media only screen and (max-width:1000px)  {
 	.line-img {  }
 
 	.hover-class { font-size: 120%; }
+	
+	#bg-panel-2 div.left  { width: 100%; }
 }
 
 #bg-panel-6 {
@@ -132,19 +135,19 @@ hr.blue-line {
 }
 
 #bg-panel-3 { 
-	background-image: url(./images/panel3_work.png);
+	background-image: url(./images/panel3.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-4 { 
-	background-image: url(./images/panel4_party.png);
+	background-image: url(./images/panel4.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-5 { 
-	background-image: url(./images/panel5_quality.png);
+	background-image: url(./images/panel5.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }

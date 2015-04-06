@@ -79,7 +79,7 @@ function dcs_billboard_page_getPanel($index)
         case 2:
         	$retval .= "<div class='bg-panel' id='bg-panel-2'>                                                        ";
 			$retval .= "	<div class='left'>                                                                         ";
-			$retval .= "		<div id='one'>                                          ";
+			$retval .= "		<div id='one' class='hover-class'>                                          ";
 			$retval .= "			<div class='line-img'></div>";
 			$retval .= "			<span>Connect anywhere there's WIFI -- no other devices or wires required.</span>           ";
 			$retval .= "		</div>                                                                                 ";
