@@ -281,7 +281,7 @@ jQuery(document).ready(function()  {
     	var panelNum = getPanelNumber(curPos);
     	var windowPos = .95;
     	var topWinEdge = 100;
-    	var botWinEdge = 100;
+    	var botWinEdge = 120;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 
