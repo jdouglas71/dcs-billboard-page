@@ -132,19 +132,19 @@ hr.blue-line {
 }
 
 #bg-panel-3 { 
-	background-image: url(./images/panel3.png);
+	background-image: url(./images/panel3_work.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-4 { 
-	background-image: url(./images/panel4.png);
+	background-image: url(./images/panel4_party.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
 
 #bg-panel-5 { 
-	background-image: url(./images/panel5.png);
+	background-image: url(./images/panel5_quality.png);
     background-repeat: no-repeat;
     background-size: contain; 
 }
