@@ -68,7 +68,7 @@ jQuery(document).ready(function()  {
         var isNearEdge = isNearPanelEdge( spritePos );
         tweakPanelTwo( spritePos );
 	
-		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s ease-in-out" } );
+		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s linear" } );
 		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + getPanelNumber(spritePos) + " " + spritePos );
         moveSprite( spritePos );
 	}); 
@@ -281,7 +281,7 @@ jQuery(document).ready(function()  {
     	var panelNum = getPanelNumber(curPos);
     	var windowPos = .95;
     	var topWinEdge = 100;
-    	var botWinEdge = 30;
+    	var botWinEdge = 100;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 ) 

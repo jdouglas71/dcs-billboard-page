@@ -115,7 +115,8 @@ hr.blue-line {
     font-size: 220%;
     color: #767676 !important;
     text-shadow: none !important;
-    line-height: 100% !important;
+    line-height: 120% !important;
+    vertical-align: baseline;
 }
 
 @media only screen and (max-width:1000px)  {
