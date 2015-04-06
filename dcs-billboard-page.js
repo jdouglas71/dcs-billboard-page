@@ -68,7 +68,7 @@ jQuery(document).ready(function()  {
         var isNearEdge = isNearPanelEdge( spritePos );
         tweakPanelTwo( spritePos );
 	
-		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .2s ease-in-out" } );
+		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s ease-in-out" } );
 		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + getPanelNumber(spritePos) + " " + spritePos );
         moveSprite( spritePos );
 	}); 
