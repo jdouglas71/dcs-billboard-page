@@ -290,7 +290,7 @@ jQuery(document).ready(function()  {
     	var panelNum = getPanelNumber(curPos);
     	var windowPos = .95;
     	var topWinEdge = 100;
-    	var botWinEdge = 120;
+    	var botWinEdge = 100;
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 || curPos < topLimit || (winTop+(panelSizes[0]*scaleFactor)) < topLimit ) 
@@ -309,7 +309,7 @@ jQuery(document).ready(function()  {
     	
     	//If we've scrolled past the bottomLimit or the sprite somehow got painted below the
     	//bottom limit, place the sprite at the bottom limit.
-    	if( curPos > bottomLimit || (winTop+($window.height()/2)) > bottomLimit )
+    	if( curPos > bottomLimit || (winTop+($window.height()*.75)) > bottomLimit )
     	{
     		curPos = bottomLimit;
     		console.log( "Put the sprite on the bottom." );
