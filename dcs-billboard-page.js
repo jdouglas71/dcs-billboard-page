@@ -89,12 +89,15 @@ jQuery(document).ready(function()  {
     	/** Foreground Section Processing */
     	topLimit = 1200*scaleFactor; //As measured from top
     	if( topLimit > ($window.height() * 0.85) )
-    		topLimit = ($window.height() * 0.85);
+    		topLimit = 100; //($window.height() * 0.5);
+    		
     	bottomLimit = (6000)*scaleFactor; //As measured from top
     	if( newWidth > 1400 ) 
     	{
     		bottomLimit -= (newWidth/1400)*20;
     	}
+    	
+    	console.log( "topLimit: " + topLimit + " bottomLimit: " + bottomLimit );
     }
     
     /**
@@ -288,8 +291,9 @@ jQuery(document).ready(function()  {
     	var botWinEdge = 120;
 
 		//If negative or not defined, start from the starting position.
-		if( isNaN(curPos) || curPos <= 0 ) 
+		if( isNaN(curPos) || curPos <= 0 || curPos < topLimit || (winTop+(panelSizes[0]*scaleFactor)) < topLimit ) 
     	{
+    		console.log( "Massage to topLimit" );
         	curPos = topLimit;        
     	}
  
@@ -298,13 +302,15 @@ jQuery(document).ready(function()  {
     	{
     		//if( panelNum == 2 ) windowPos = 0.4;
     		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
+    		console.log( "Put the sprite in the window." );
     	}   	
     	
     	//If we've scrolled past the bottomLimit or the sprite somehow got painted below the
     	//bottom limit, place the sprite at the bottom limit.
-    	if( winBot > bottomLimit || curPos > bottomLimit )
+    	if( curPos > bottomLimit )
     	{
     		curPos = bottomLimit;
+    		console.log( "Put the sprite on the bottom." );
     	}
     	
     	console.log( "Massage position: " + curPos );
@@ -318,7 +324,7 @@ jQuery(document).ready(function()  {
 	function moveSprite(pos)
 	{
 		if( pos > bottomLimit ) return;
-		console.log( "Moving sprite to: " + pos );
+		//console.log( "Moving sprite to: " + pos );
 		jQuery('#dcs-billboard-sprite').css( { 'top' : pos } );
 	}
     
