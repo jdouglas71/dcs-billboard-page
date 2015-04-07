@@ -13,7 +13,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1309, 620, 1200, 1200, 1200, 753, 1291);
+    var panelSizes = new Array( 1309, 480, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 
@@ -87,11 +87,11 @@ jQuery(document).ready(function()  {
     	jQuery('#dcs-billboard-sprite').height( newWidth/10 );
     	
     	/** Foreground Section Processing */
-    	topLimit = 1200*scaleFactor; //As measured from top
+    	topLimit = 1050*scaleFactor; //As measured from top
     	if( topLimit > ($window.height() * 0.85) )
-    		topLimit = 100; //($window.height() * 0.5);
+    		topLimit = ($window.height() * 0.75);
     		
-    	bottomLimit = (6000)*scaleFactor; //As measured from top
+    	bottomLimit = (5800)*scaleFactor; //As measured from top
     	if( newWidth > 1400 ) 
     	{
     		bottomLimit -= (newWidth/1400)*20;
@@ -206,7 +206,9 @@ jQuery(document).ready(function()  {
     	 //console.log( "bottomEdge: " + bottomEdge + " topEdge: " + topEdge );
     	 //console.log( "curPos: " + curPos + " sprite height: " + spriteHeight);
     	 
-    	 var pos = curPos + (spriteHeight/2);
+    	 var pos = curPos;
+    	 //Measure position from the middle of the sprite going down. 
+    	 if( $deltaY > 0 )  pos += (spriteHeight/2);
     	 
     	 if( (pos < (topEdge+aThird)) ) 
     	 {
