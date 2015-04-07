@@ -91,7 +91,7 @@ jQuery(document).ready(function()  {
     	if( topLimit > ($window.height() * 0.85) )
     		topLimit = ($window.height() * 0.75);
     		
-    	bottomLimit = (5800)*scaleFactor; //As measured from top
+    	bottomLimit = (5820)*scaleFactor; //As measured from top
     	if( newWidth > 1400 ) 
     	{
     		bottomLimit -= (newWidth/1400)*20;
@@ -309,7 +309,7 @@ jQuery(document).ready(function()  {
     	
     	//If we've scrolled past the bottomLimit or the sprite somehow got painted below the
     	//bottom limit, place the sprite at the bottom limit.
-    	if( curPos > bottomLimit )
+    	if( curPos > bottomLimit || (winTop+($window.height()/2)) > bottomLimit )
     	{
     		curPos = bottomLimit;
     		console.log( "Put the sprite on the bottom." );
