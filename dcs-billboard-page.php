@@ -81,15 +81,15 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "	<div class='left'>                                                                         ";
 			$retval .= "		<div id='one' class='hover-class'>                                          ";
 			$retval .= "			<div class='line-img'></div>";
-			$retval .= "			<span>Connect anywhere there's WIFI -- no other devices or wires required.</span>           ";
+			$retval .= "			<span>Download any app onto the Touchjet Pond.</span>           ";
 			$retval .= "		</div>                                                                                 ";
 			$retval .= "		<div id='two'>                                                                         ";
 			$retval .= "			<div class='line-img'></div>";
-			$retval .= "			<span>Download your favorite apps and content right onto the touchjet pond.</span>          ";
+			$retval .= "			<span>Control your apps right on the wall.</span>          ";
 			$retval .= "		</div>                                                                                 ";
 			$retval .= "		<div id='three'>                                                                       ";
 			$retval .= "			<div class='line-img'></div>";
-			$retval .= "			<span>Control your apps right on the wall with a stylus or air mouse.</span>                ";
+			$retval .= "			<span>Works without wires for ultimate portability.</span>                ";
 			$retval .= "		</div>                                                                                 ";
 			$retval .= "	</div>                                                                                     ";
 			$retval .= "	<div class='right'>                                                                        ";
