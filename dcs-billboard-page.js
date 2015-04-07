@@ -13,7 +13,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1475, 620, 1200, 1200, 1200, 753, 1291);
+    var panelSizes = new Array( 1309, 620, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 
@@ -90,7 +90,7 @@ jQuery(document).ready(function()  {
     	topLimit = 1200*scaleFactor; //As measured from top
     	if( topLimit > ($window.height() * 0.85) )
     		topLimit = ($window.height() * 0.85);
-    	bottomLimit = (6170)*scaleFactor; //As measured from top
+    	bottomLimit = (6000)*scaleFactor; //As measured from top
     	if( newWidth > 1400 ) 
     	{
     		bottomLimit -= (newWidth/1400)*20;
