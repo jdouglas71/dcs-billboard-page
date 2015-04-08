@@ -13,7 +13,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1309, 480, 1200, 1200, 1200, 753, 1291);
+    var panelSizes = new Array( 1309, 460, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 

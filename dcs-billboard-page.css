@@ -60,14 +60,19 @@ section.bg-panel {
 #bg-panel-2 { 
 	width: 100%;
 	padding-top: 15px;
+	
+	display: table;
+	height: 100%;
 }
 
 #bg-panel-2 div.left  {
-	padding-top: 25px;
+	//padding-top: 25px;
     float: left;
 	width: 100%;
-	height: 100%
+	height: 100%;
     vertical-align: middle;
+    
+    display: table-cell;
 }
 
 #bg-panel-2 div.right {
@@ -87,6 +92,8 @@ section.bg-panel {
 	//text-shadow: 0 0 5px rgba(0,0,0,0.5);
 	float: left;
 	//margin-top: 25px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #one img, #two img, #three img  {
