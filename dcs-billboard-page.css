@@ -60,7 +60,7 @@ section.bg-panel {
 #bg-panel-2 { 
 	width: 100%;
 	padding-top: 15px;
-	
+	padding-bottom: 15px;
 	display: table;
 	height: 100%;
 }

@@ -13,7 +13,7 @@ jQuery(document).ready(function()  {
     
     /** Background Section Processing */
     //The panel sizes 
-    var panelSizes = new Array( 1309, 460, 1200, 1200, 1200, 753, 1291);
+    var panelSizes = new Array( 1309, 400, 1200, 1200, 1200, 753, 1291);
 	var scaleFactor = 0.5;
 	var panelWidth = 2400; //Starting image widths
 
@@ -91,7 +91,7 @@ jQuery(document).ready(function()  {
     	if( topLimit > ($window.height() * 0.85) )
     		topLimit = ($window.height() * 0.75);
     		
-    	bottomLimit = (5820)*scaleFactor; //As measured from top
+    	bottomLimit = (5800)*scaleFactor; //As measured from top
     	if( newWidth > 1400 ) 
     	{
     		bottomLimit -= (newWidth/1400)*20;
@@ -302,7 +302,6 @@ jQuery(document).ready(function()  {
     	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
     	if( curPos < (winTop+topWinEdge+spriteHeight) || curPos > (winBot-botWinEdge-spriteHeight) )
     	{
-    		//if( panelNum == 2 ) windowPos = 0.4;
     		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
     		console.log( "Put the sprite in the window." );
     	}   	
