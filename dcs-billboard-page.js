@@ -14,7 +14,7 @@ jQuery(document).ready(function()  {
     /** Background Section Processing */
     //The panel sizes 
     var panelSizes = new Array( 1309, 400, 1200, 1200, 1200, 753, 1291);
-	var scaleFactor = 0.5;
+	var scaleFactor = 1.0;
 	var panelWidth = 2400; //Starting image widths
 
 	/** Dictates the "Swap state" of the panels. 2,6 and 7 don't have swap panels.*/
