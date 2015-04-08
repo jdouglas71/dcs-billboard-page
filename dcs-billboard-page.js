@@ -28,6 +28,7 @@ jQuery(document).ready(function()  {
     var $sprite = jQuery('#dcs-billboard-sprite');
     //var curPos = parseInt($sprite.css('top'),10);
     spritePos = massageSpritePosition( spritePos );
+    $sprite.css( { 'transition' : 'top 1s' } );
     /** Move the sprite */
     setTimeout( function() {
 		moveSprite( spritePos );
@@ -68,7 +69,7 @@ jQuery(document).ready(function()  {
         var isNearEdge = isNearPanelEdge( spritePos );
         tweakPanelTwo( spritePos );
 	
-		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s linear" } );
+		//jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s linear" } );
 		jQuery('#dcs-billboard-sprite-text').val( "panel num: " + getPanelNumber(spritePos) + " " + spritePos );
         moveSprite( spritePos );
 	}); 
@@ -291,6 +292,26 @@ jQuery(document).ready(function()  {
     	var windowPos = .95;
     	var topWinEdge = 100;
     	var botWinEdge = 100;
+    	
+    	if( $deltaY >= 0 )
+    	{
+    		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s cubic-bezier(0.095,1.025,1.000,0.970)" } );
+    		windowPos = 0.88;
+    	}
+    	else
+    	{
+    		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s cubic-bezier(0.000,1.650,1.000,0.970)" } );
+    		windowPos = 0.60;
+    	}
+
+ 		//Window Limits first, then boundry conditions.
+ 
+    	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
+    	if( curPos < (winTop+topWinEdge+spriteHeight)  )
+    	{
+    		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
+    		console.log( "Put the sprite in the window." );
+    	}   	
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 || curPos < topLimit || (winTop+(panelSizes[0]*scaleFactor)) < topLimit ) 
@@ -298,9 +319,8 @@ jQuery(document).ready(function()  {
     		console.log( "Massage to topLimit" );
         	curPos = topLimit;        
     	}
- 
-    	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
-    	if( curPos < (winTop+topWinEdge+spriteHeight) || curPos > (winBot-botWinEdge-spriteHeight) )
+
+    	if( curPos > (winBot-botWinEdge-spriteHeight) )
     	{
     		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
     		console.log( "Put the sprite in the window." );
@@ -313,6 +333,8 @@ jQuery(document).ready(function()  {
     		curPos = bottomLimit;
     		console.log( "Put the sprite on the bottom." );
     	}
+    	
+    	if( curPos < topLimit ) curPos = topLimit;
     	
     	console.log( "Massage position: " + curPos );
     	
