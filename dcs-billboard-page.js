@@ -10,6 +10,7 @@ jQuery(document).ready(function()  {
     var $oldPanel = 0, $oldYPos = 0, $deltaY = 0;
     var topLimit, bottomLimit;
     var spritePos = -200;
+    var mobileLimit = 800;
     
     /** Background Section Processing */
     //The panel sizes 
@@ -19,6 +20,9 @@ jQuery(document).ready(function()  {
 
 	/** Dictates the "Swap state" of the panels. 2,6 and 7 don't have swap panels.*/
 	var swapState = new Array( true, false, true, true, true, false, false );
+	
+	if( $window.width() < mobileLimit ) return; //Mobile, we're out.
+	
 	//Adjust the scale factor based on the window width.
     processScaleFactorChange( $window.width() );
     
@@ -39,6 +43,8 @@ jQuery(document).ready(function()  {
 	 * Handle resize events. We need to recalculate the scaleFactor
 	 */
 	jQuery(window).resize( function() {
+		if( $window.width() < mobileLimit ) return;
+	
 		processScaleFactorChange( jQuery("section.bg-panel").width() );
 		
 		/**Refresh sprite as necessary */
@@ -58,6 +64,7 @@ jQuery(document).ready(function()  {
 	* React to scrolling events 
 	*/
     jQuery(window).scroll(function()  {
+    	if( $window.width() < mobileLimit ) return;
     	//Scroll Direction and delta
 		var yPos = $window.scrollTop();
         $deltaY = yPos - $oldYPos; 

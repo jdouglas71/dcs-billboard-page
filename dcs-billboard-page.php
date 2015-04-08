@@ -74,10 +74,12 @@ function dcs_billboard_page_getPanel($index)
 		case 5:
 			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index."_0.png'>";
+			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
 			$retval .= "</div>";
 			break;
         case 2:
         	$retval .= "<div class='bg-panel' id='bg-panel-2'>                                                        ";
+			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
 			$retval .= "	<div class='left'>                                                                         ";
 			$retval .= "		<div id='one' class='hover-class'>                                          ";
 			$retval .= "			<div class='line-img'></div>";
@@ -100,6 +102,7 @@ function dcs_billboard_page_getPanel($index)
         case 6:
            	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
+			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
            	$retval .= "    <div class='learn-more'>";
             $retval .= "        <a name='features' style='position:relative;padding-top:600px;'>";
             $retval .= "        <a href='".site_url("/features")."'>Learn More></a></a>";
@@ -109,7 +112,8 @@ function dcs_billboard_page_getPanel($index)
         case 7:
 	    	$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
-	        $retval .= "    <div style='margin: 10px auto;width:10%;'>";
+			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
+	        $retval .= "    <div class='buy-button'>";
             $retval .= "        <a class='buy-button' href='http://touchjetstore.myshopify.com/pages/touchjet-pond'>Buy</a>";
             $retval .= "    </div>";
 		    $retval .= "</div>";
@@ -117,6 +121,7 @@ function dcs_billboard_page_getPanel($index)
 	default:
 			$retval .= "<div class='bg-panel' id='bg-panel-".$index."'>";
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
+			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
 			$retval .= "</div>";
 	}
 
