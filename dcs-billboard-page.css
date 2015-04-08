@@ -66,12 +66,9 @@ section.bg-panel {
 }
 
 #bg-panel-2 div.left  {
-	//padding-top: 25px;
-    float: left;
 	width: 100%;
 	height: 100%;
     vertical-align: middle;
-    
     display: table-cell;
 }
 
