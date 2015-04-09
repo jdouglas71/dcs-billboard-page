@@ -311,14 +311,9 @@ jQuery(document).ready(function()  {
     		windowPos = 0.60;
     	}
 
+		console.log( "Initial pos:" + curPos );
+
  		//Window Limits first, then boundry conditions.
- 
-    	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
-    	if( curPos < (winTop+topWinEdge+spriteHeight)  )
-    	{
-    		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
-    		console.log( "Put the sprite in the window." );
-    	}   	
 
 		//If negative or not defined, start from the starting position.
 		if( isNaN(curPos) || curPos <= 0 || curPos < topLimit || (winTop+(panelSizes[0]*scaleFactor)) < topLimit ) 
@@ -327,10 +322,17 @@ jQuery(document).ready(function()  {
         	curPos = topLimit;        
     	}
 
-    	if( curPos > (winBot-botWinEdge-spriteHeight) )
+    	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
+    	if( curPos < (winTop+topWinEdge+spriteHeight)  )
     	{
     		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
     		console.log( "Put the sprite in the window." );
+    	}   	
+
+    	if( curPos > (winBot-botWinEdge-spriteHeight) )
+    	{
+    		curPos = winTop + (($window.height()-spriteHeight)*windowPos);
+    		console.log( "TOP: Put the sprite in the window." );
     	}   	
     	
     	//If we've scrolled past the bottomLimit or the sprite somehow got painted below the
@@ -338,7 +340,7 @@ jQuery(document).ready(function()  {
     	if( curPos > bottomLimit || (winTop+($window.height()*.75)) > bottomLimit )
     	{
     		curPos = bottomLimit;
-    		console.log( "Put the sprite on the bottom." );
+    		console.log( "BOTTOM: Put the sprite on the bottom." );
     	}
     	
     	if( curPos < topLimit ) curPos = topLimit;
