@@ -99,7 +99,7 @@ jQuery(document).ready(function()  {
     	if( topLimit > ($window.height() * 0.85) )
     		topLimit = ($window.height() * 0.75);
     		
-    	bottomLimit = (5800)*scaleFactor; //As measured from top
+    	bottomLimit = (5830)*scaleFactor; //As measured from top
     	if( newWidth > 1400 ) 
     	{
     		bottomLimit -= (newWidth/1400)*20;

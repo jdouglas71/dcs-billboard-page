@@ -177,7 +177,7 @@ hr.blue-line {
 }
 
 #bg-panel-7 { 
-    margin-top: 30px;
+    //margin-top: 30px;
     background-repeat: no-repeat;
     background-size: contain; 
 	background-color: #f3f2f2 !important;
