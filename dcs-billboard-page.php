@@ -114,7 +114,7 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
 			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
 	        $retval .= "    <div class='buy-button'>";
-            $retval .= "        <a class='buy-button' href='http://touchjetstore.myshopify.com/pages/touchjet-pond'>Buy</a>";
+            $retval .= "        <a class='buy-button' href='http://touchjetweb.myshopify.com/cart'>Buy</a>";
             $retval .= "    </div>";
 		    $retval .= "</div>";
             break;
