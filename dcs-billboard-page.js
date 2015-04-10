@@ -300,14 +300,16 @@ jQuery(document).ready(function()  {
     	var topWinEdge = 100;
     	var botWinEdge = 100;
     	
+    	var speed = 4;
+    	
     	if( $deltaY >= 0 )
     	{
-    		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s cubic-bezier(0.095,1.025,1.000,0.970)" } );
+    		jQuery('#dcs-billboard-sprite').css( { "transition" : "top "+speed+"s cubic-bezier(0.095,1.025,1.000,0.970)" } );
     		windowPos = 0.88;
     	}
     	else
     	{
-    		jQuery('#dcs-billboard-sprite').css( { "transition" : "top .5s cubic-bezier(0.000,1.650,1.000,0.970)" } );
+    		jQuery('#dcs-billboard-sprite').css( { "transition" : "top "+speed+"s cubic-bezier(0.000,1.650,1.000,0.970)" } );
     		windowPos = 0.60;
     	}
 
