@@ -177,7 +177,6 @@ hr.blue-line {
 }
 
 #bg-panel-7 { 
-    //margin-top: 30px;
     background-repeat: no-repeat;
     background-size: contain; 
 	background-color: #f3f2f2 !important;
@@ -200,7 +199,7 @@ a.buy-button {
     text-align: center;
     display: block;
     margin: 0 auto;
-    max-width: 65px;
+    max-width: 55px;
 }
 
 a.buy-button:hover,  a.buy-button:focus {
