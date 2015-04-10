@@ -300,7 +300,7 @@ jQuery(document).ready(function()  {
     	var topWinEdge = 100;
     	var botWinEdge = 100;
     	
-    	var speed = 2;
+    	var speed = ;
     	
     	if( $deltaY >= 0 )
     	{
@@ -310,7 +310,7 @@ jQuery(document).ready(function()  {
     	else
     	{
     		jQuery('#dcs-billboard-sprite').css( { "transition" : "top "+speed+"s cubic-bezier(0.000,1.650,1.000,0.970)" } );
-    		windowPos = 0.60;
+    		windowPos = 0.65;
     	}
 
 		console.log( "Initial pos:" + curPos );
