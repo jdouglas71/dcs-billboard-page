@@ -105,7 +105,7 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
            	$retval .= "    <div class='learn-more'>";
             $retval .= "        <a name='features' style='position:relative;padding-top:600px;'>";
-            $retval .= "        <a href='".site_url("/features")."'>Learn More></a></a>";
+            $retval .= "        <a href='http://touchjetweb.myshopify.com/products/touchjet-pond'>Learn More></a></a>";
 			$retval .= "    </div>";
 			$retval .= "</div>";
             break;
@@ -114,7 +114,7 @@ function dcs_billboard_page_getPanel($index)
 			$retval .= "	<img id='bg-panel-".$index."' src='".plugin_dir_url(__FILE__)."/images/panel".$index.".png'>";
 			$retval .= "	<img id='bg-panel-mobile-".$index."' src='".plugin_dir_url(__FILE__)."/images/mobile/panel".$index.".png'>";
 	        $retval .= "    <div class='buy-button'>";
-            $retval .= "        <a class='buy-button' href='http://touchjetweb.myshopify.com/cart'>Buy</a>";
+            $retval .= "        <a class='buy-button' href='http://touchjetweb.myshopify.com/cart/1184020345:1'>Buy</a>";
             $retval .= "    </div>";
 		    $retval .= "</div>";
             break;

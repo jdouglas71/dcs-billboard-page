@@ -300,7 +300,7 @@ jQuery(document).ready(function()  {
     	var topWinEdge = 100;
     	var botWinEdge = 100;
     	
-    	var speed = 2;
+    	var speed = 1.7;
     	
     	if( $deltaY >= 0 )
     	{
