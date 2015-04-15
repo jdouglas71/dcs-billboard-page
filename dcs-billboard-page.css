@@ -254,6 +254,9 @@ div.learn-more a {
 	
 	#dcs-billboard-sprite { display: none; }
 	#bg-panel-2 div.left  { display: none;}
+	
+	div.learn-more { width: 40%; padding-left: 10px; }
+	div.learn-more a { font-size: 100%; }
 
 		
 	img#bg-panel-1 { display: none; }
