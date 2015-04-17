@@ -38,7 +38,7 @@ jQuery(document).ready(function()  {
 		moveSprite( spritePos );
         swapPanelImages( 1 );
     }, 1000);
-
+    
 	/**
 	 * Handle resize events. We need to recalculate the scaleFactor
 	 */
@@ -298,14 +298,14 @@ jQuery(document).ready(function()  {
     	var panelNum = getPanelNumber(curPos);
     	var windowPos = .95;
     	var topWinEdge = 100;
-    	var botWinEdge = 100;
+    	var botWinEdge = 200;
     	
     	var speed = 1.7;
     	
     	if( $deltaY >= 0 )
     	{
     		jQuery('#dcs-billboard-sprite').css( { "transition" : "top "+speed+"s cubic-bezier(0.095,1.025,1.000,0.970)" } );
-    		windowPos = 0.88;
+    		windowPos = 0.78;
     	}
     	else
     	{
@@ -322,6 +322,12 @@ jQuery(document).ready(function()  {
     	{
     		console.log( "Massage to topLimit" );
         	curPos = topLimit;        
+    	}
+    	
+    	if( (winBot > winTop+(panelSizes[0]*scaleFactor)) && (winTop == 0) )
+    	{
+    		console.log( "Massage to toplimit" );
+    		curPos = topLimit;
     	}
 
     	//If the sprite isn't being shown in the current window, put it at the windowPos mark in the window.
